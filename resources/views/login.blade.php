@@ -51,8 +51,10 @@
 @include('footer')
 <div id="signup-modal" class="modal">
     <div class="modal-content">
+      <form method="post" action="#">
       <h4>Sign up a new mail account</h4>
 	<div class="container">
+        @csrf
       <div class="row">
           <div class="input-field col m6">
               <input name="username" id="u_id" type="text" class="validate" required>
@@ -83,16 +85,41 @@
               <label for="pc_id">Confirm password</label>
           </div>
       </div>
+      <div class="row">
+          <div class="col m3">
+              {!! captcha_img() !!}
+          </div>
+          <div class="col m1">
+              <a href="#!" id="refreshCaptcha"><ion-icon name="refresh-circle" size="large"></ion-icon></a>
+          </div>
+      <div>
+      <div class="row">
+          <div class="input-field col m12">
+              <input name="captcha" id="c_id" type="text" class="validate" required>
+              <label for="c_id">Captcha</label>
+          </div>
+      </div>
     </div></div>
     <div class="modal-footer" style="text-align:center;">
-      <a href="#!" class="waves-effect waves-light blue darken-2 btn">Sign up</a>
+      <button type="submit" class="waves-effect waves-light blue darken-2 btn">Sign up</button>
     </div>
+    </form>
   </div>
-<script>
+<script type="text/javascript">
 $(document).ready(function(){
     $('.modal').modal();
     $('select').formSelect();
   });
+
+$('#refreshCaptcha').click(function(){
+  $.ajax({
+     type:'GET',
+     url:'/refreshCaptcha',
+     success:function(data){
+        $(".captcha div").html(data.captcha);
+     }
+  });
+});
 </script>
     </body>
 </html>
