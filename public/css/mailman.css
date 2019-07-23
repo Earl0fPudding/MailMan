@@ -1,0 +1,25 @@
+ body {
+    background-color: #f4f4f4;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+ main {
+    flex: 1 0 auto;
+  }
+
+/* label focus color */
+ .input-field input:focus + label {
+   color: #42a5f5 !important;
+ }
+
+ /* label underline focus color */
+ .row .input-field input:focus {
+   border-bottom: 1px solid #42a5f5 !important;
+   box-shadow: 0 1px 0 0 #42a5f5 !important
+ }
+
+ input {
+    color: #1976d2;
+ }
