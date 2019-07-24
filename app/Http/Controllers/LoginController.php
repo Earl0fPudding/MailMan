@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Input;
+use Session;
 
-class Login extends Controller
+class LoginController extends Controller
 {
     public function showLogin(Request $request) {
         return view('login');

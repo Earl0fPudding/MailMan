@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', 'Login@showLogin')->name('Login.showLogin');
-Route::get('/start', 'Login@showStartPage')->name('Login.showStartPage');
-Route::post('/login', 'Login@login')->name('Login.login');
-Route::get('/logout', 'Login@logout')->name('Login.logout');
-Route::get('/refreshCaptcha', 'Captcha@refreshCaptcha')->name('Captcha.refreshCaptcha');
+Route::get('/', 'LoginController@showLogin')->name('Login.showLogin');
+Route::get('/start', 'LoginController@showStartPage')->name('Login.showStartPage');
+Route::post('/login', 'LoginController@login')->name('Login.login');
+Route::get('/logout', 'LoginController@logout')->name('Login.logout');
+Route::get('/refreshCaptcha', 'CaptchaController@refreshCaptcha')->name('Captcha.refreshCaptcha');

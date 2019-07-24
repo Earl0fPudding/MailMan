@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Captcha;
 
-class Captcha extends Controller
+class CaptchaController extends Controller
 {
     public function refreshCaptcha()
     {
-        return response()->json(['captcha'=> captcha_img()]);
+	return captcha_src();
+       // return response()->json(['captcha'=> captcha_img()]);
     }
 }

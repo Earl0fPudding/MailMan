@@ -24,7 +24,7 @@
                     <div class="card">
                         <div class="card-content">
                             <!-- <center><span class="card-title black-text">Login</span></center> -->
-                            <form method="post" action="/login">
+                            <form method="post" action="{{route('Login.login')}}">
                                 @csrf
                                 <div class="row">
                                     <div class="input-field col s12">
@@ -56,14 +56,14 @@
 	<div class="container">
         @csrf
       <div class="row">
-          <div class="input-field col m6">
+          <div class="input-field col m6 s12">
               <input name="username" id="u_id" type="text" class="validate" required>
               <label for="u_id">Username</label>
           </div>
-          <div class="col m1 valign-wrapper">
+          <div class="col m1 valign-wrapper s2">
               <h5>@</h5>
           </div>
-          <div class="input-field col m5">
+          <div class="input-field col m5 s10">
               <select id="d_id">
                   <option value="" disabled selected>Choose the domain</option>
                   <option value="1">Option 1</option>
@@ -111,14 +111,15 @@ $(document).ready(function(){
     $('select').formSelect();
   });
 
-$('#refreshCaptcha').click(function(){
-  $.ajax({
-     type:'GET',
-     url:'/refreshCaptcha',
-     success:function(data){
-        $(".captcha div").html(data.captcha);
-     }
-  });
+$('#refreshCaptcha').on('click', function(e){
+    e.preventDefault();
+    $.ajax({
+        type: "GET",
+        url: '/refreshCaptcha',
+    }).done(function( msg ) {
+	const x = document.getElementsByTagName("img");
+	for (let e of x) { if(e.src.includes("captcha")) { e.src = msg; } }
+    });
 });
 </script>
     </body>
