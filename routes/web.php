@@ -23,3 +23,5 @@ Route::get('/admin/users', 'AdminController@showUsers')->name('Admin.showUsers')
 Route::get('/admin/admins', 'AdminController@showAdmins')->name('Admin.showAdmins');
 Route::get('/admin/aliases', 'AdminController@showAliases')->name('Admin.showAliases');
 Route::get('/admin/invites', 'AdminController@showInvites')->name('Admin.showInvites');
+Route::get('/admin/domains', 'AdminController@showDomains')->name('Admin.showDomains');
+Route::post('/admin/domains/add', 'AdminController@addDomain')->name('Admin.addDomain');

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Domain;
 
 class AdminController extends Controller
 {
@@ -15,8 +17,14 @@ class AdminController extends Controller
 	return view('admindashboard');
     }
 
+    public function showDomains(Request $request){
+	$domains = Domain::all();
+	return view('showdomains', [ 'domains' => $domains ]);
+    }
+
     public function showUsers(Request $request){
-	return view('showusers');
+	$users=User::all();
+	return view('showusers', [ 'users' => $users ]);
     }
 
     public function showAdmins(Request $request){

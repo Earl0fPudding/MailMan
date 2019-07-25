@@ -6,6 +6,7 @@
      <?php if(auth()->guard('admin')->check()) { ?>
       <li><a href="{{route('Admin.showUsers')}}">Mail users</a></li>
       <li><a href="{{route('Admin.showAdmins')}}">Admins</a></li>
+      <li><a href="{{route('Admin.showDomains')}}">Domains</a></li>
       <li><a href="{{route('Admin.showAliases')}}">Aliases</a></li>
       <li><a href="{{route('Admin.showInvites')}}">Invites</a></li>
      <?php } else if(auth()->guard('mail')->check()) { ?>
@@ -19,6 +20,7 @@
     <?php if(auth()->guard('admin')->check()) { ?>
       <li><a href="{{route('Admin.showUsers')}}">Mail users</a></li>
       <li><a href="{{route('Admin.showAdmins')}}">Admins</a></li>
+      <li><a href="{{route('Admin.showDomains')}}">Domains</a></li>
       <li><a href="{{route('Admin.showAliases')}}">Aliases</a></li>
       <li><a href="{{route('Admin.showInvites')}}">Invites</a></li>
      <?php } else if(auth()->guard('mail')->check()) { ?>
