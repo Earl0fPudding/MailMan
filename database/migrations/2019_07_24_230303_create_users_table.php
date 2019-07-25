@@ -15,9 +15,10 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('email', 128)->nullable($value = false)->unique();
+            $table->string('username', 128)->nullable($value = false);
             $table->string('password', 106)->nullable($value = false);
             $table->unsignedBigInteger('domain_id')->nullable($value = false);
+            $table->unique(['username', 'domain_id']);
             $table->foreign('domain_id')->references('id')->on('domains')->onDelete('cascade');
             $table->timestamps();
         });
