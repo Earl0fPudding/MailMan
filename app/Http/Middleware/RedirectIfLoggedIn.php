@@ -19,7 +19,7 @@ class RedirectIfLoggedIn
             return redirect(route('User.showStartpage'));
         }
 	if(auth()->guard('admin')->check()) {
-            return redirect(route('Admin.showStartpage'));
+            return redirect(route('Admin.showDashboard'));
         }
         return $next($request);
     }

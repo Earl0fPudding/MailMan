@@ -32,8 +32,8 @@ class LoginController extends Controller
 
     public function adminLogin(Request $request){
 	if (Auth::guard('admin')->attempt($request->only('username', 'password'))) {
-		return 'you are now admin!';
-	} else { return 'you failed!'; }
+		return redirect(route('Admin.showDashboard'));
+	} else { return redirect(route('Login.showAdminLogin')); }
     }
 
     public function login(Request $request) {
