@@ -16,3 +16,5 @@ Route::get('/start', 'LoginController@showStartPage')->name('Login.showStartPage
 Route::post('/login', 'LoginController@login')->name('Login.login');
 Route::get('/logout', 'LoginController@logout')->name('Login.logout');
 Route::get('/refreshCaptcha', 'CaptchaController@refreshCaptcha')->name('Captcha.refreshCaptcha');
+Route::get('/admin', 'LoginController@showAdminLogin')->name('Login.showAdminLogin');
+Route::post('/admin', 'LoginController@adminLogin')->name('Login.adminLogin');

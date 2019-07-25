@@ -12,13 +12,23 @@ class LoginController extends Controller
     public function showLogin(Request $request) {
         return view('login');
     }
+
+    public function showAdminLogin(Request $request){
+	return view('adminlogin');
+    }
     public function logout(Request $request) {
 	Session::flush();
 	return redirect(route('Login.showLogin'));
     }
 
     public function showStartPage(Request $request){
-	return view('welcome');
+	return view('userstartpage');
+    }
+
+    public function adminLogin(Request $request){
+	if (Auth::guard('admin')->attempt($request->only('username', 'password'))) {
+		return 'you are now admin!';
+	} else { return 'you failed!'; }
     }
 
     public function login(Request $request) {

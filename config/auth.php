@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'mail',
         'passwords' => 'users',
     ],
 
@@ -36,11 +36,14 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'mail' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
+	'admin' => [
+	    'driver' => 'session',
+	    'provider' => 'admins',
+	],
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -66,15 +69,19 @@ return [
     */
 
     'providers' => [
-        //'users' => [
-        //    'driver' => 'eloquent',
-        //    'model' => App\User::class,
-        //],
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\User::class,
+        ],
+	'admins' => [
+	    'driver' => 'eloquent',
+	    'model' => App\Admin::class,
+	],
 
-         'users' => [
-             'driver' => 'database',
-             'table' => 'virtual_users',
-         ],
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'virtual_users',
+        // ],
     ],
 
     /*
