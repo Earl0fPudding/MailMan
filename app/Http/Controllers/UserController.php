@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('checkAdmin');
+        $this->middleware('checkUser');
     }
 }

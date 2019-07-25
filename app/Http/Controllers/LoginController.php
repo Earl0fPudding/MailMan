@@ -9,6 +9,11 @@ use Session;
 
 class LoginController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('redirectIfLoggedIn')->only(['showLogin', 'showAdminLogin']);
+    }
+
     public function showLogin(Request $request) {
         return view('login');
     }
