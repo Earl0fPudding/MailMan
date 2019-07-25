@@ -38,4 +38,27 @@ class AdminController extends Controller
     public function showInvites(Request $request){
 	return view('showinvites');
     }
+
+    public function addDomain(Request $request){
+	$domain = new Domain();
+	$domain->name = $request->name;
+	$domain->registerable = isset($request->registerable);
+	$domain->save();
+
+	return redirect(route('Admin.showDomains'));
+    }
+
+    public function updateDomain(Request $request){
+	$domain = Domain::findOrFail($request->id);
+	$domain->registerable = $request->registerable;
+	$domain->save();
+
+	return redirect(route('Admin.showDomains'));
+    }
+
+    public function deleteDomain(Request $request){
+	Domain::destroy($request->id);
+
+	return redirect(route('Admin.showDomains'));
+    }
 }

@@ -19,7 +19,7 @@
 	    </div>
             <div class="row">
                 <div class="col m12">
-                    <table class="responsive-table striped">
+                    <table class="striped">
 			<thead>
 			    	<tr>
 				    <th>Domain name</th>
@@ -30,9 +30,21 @@
 			<tbody>
 			    @foreach($domains as $domain)
 				<tr>
+				  <form method="post" id="edit_form_{{ $domain->id }}" action="{{route('Admin.updateDomain', ['id' => $domain->id])}}"></form>
 					<td>{{ $domain->name }}</td>
-					<td>{{ $domain->registerable }}</td>
-					<td>...</td>
+					<td>
+					     <div class="input-field col m2">
+					         <input type="hidden" name="_token" form="edit_form_{{ $domain->id }}" value="{{ csrf_token() }}">
+    						 <select name="registerable" form="edit_form_{{ $domain->id }}">
+      						     <option value="0" @if($domain->registerable==0) selected @endif>No</option>
+      						     <option value="1" @if($domain->registerable==1) selected @endif>Yes</option>
+    						 </select>
+  					     </div>
+					</td>
+					<td>
+					    <button type="submit" form="edit_form_{{ $domain->id }}" class="btn-flat">Save</button>
+					    <a href="{{route('Admin.deleteDomain', ['id' => $domain->id])}}"><button type="button" class="btn-flat">Delete</button></a>
+					</td>
 				</tr>
 			    @endforeach
 			</tbody>
@@ -59,7 +71,7 @@
 	      <div class="input-field col m12">
 		<p>
                   <label for="r_id">
-        	    <input type="checkbox" name="registerable" id="r_id" class="validate" required>
+        	    <input type="checkbox" name="registerable" id="r_id" class="validate" value="1">
         	    <span>Registerable</span>
                   </label>
                 </p>
@@ -76,6 +88,7 @@
 <script>
 $(document).ready(function(){
     $('.modal').modal();
+    $('select').formSelect();
   });
 
 </script>
