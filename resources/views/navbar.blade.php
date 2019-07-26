@@ -50,7 +50,7 @@
           <div class="row">
             <div class="input-field col m12">
               <input name="old_password" placeholder="Old password" id="op_id" type="password" class="validate" required>
-              <label for="op_id">New password</label>
+              <label for="op_id">Old password</label>
             </div>
           </div>
           <div class="row">
