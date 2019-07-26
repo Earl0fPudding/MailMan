@@ -27,10 +27,22 @@
                             <form method="post" action="{{route('Login.login')}}">
                                 @csrf
                                 <div class="row">
-                                    <div class="input-field col s12">
-                                        <input type="email" class="validate" name="mail" id="m_id" required autofocus>
-                                        <label for="m_id">Mail address</label>
-                                    </div>
+                                    <div class="input-field col m6 s12">
+              				<input name="username" id="u_id" type="text" class="validate" required>
+              				<label for="u_id">Username</label>
+          			    </div>
+          			    <div class="col m1 valign-wrapper s2">
+              				<h5>@</h5>
+          			    </div>
+          			    <div class="input-field col m5 s10">
+              				<select id="d_id" name="domain_id">
+             				     <option value="" disabled selected>Choose a domain</option>
+             				     @foreach($domains as $domain)
+					     <option value="{{ $domain->id }}">{{ $domain->name }}</option>
+					     @endforeach
+             				</select>
+              				<label for="d_id">Domain</label>
+          			    </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s12">
@@ -64,11 +76,11 @@
               <h5>@</h5>
           </div>
           <div class="input-field col m5 s10">
-              <select id="d_id">
-                  <option value="" disabled selected>Choose the domain</option>
-                  <option value="1">Option 1</option>
-                  <option value="2">Option 2</option>
-                  <option value="3">Option 3</option>
+              <select id="d_id" name="domain_id">
+                  <option value="" disabled selected>Choose a domain</option>
+                  @foreach($registerable_domains as $domain)
+		  <option value="{{ $domain->id }}">{{ $domain->name }}</option>
+		  @endforeach
               </select>
               <label for="d_id">Domain</label>
           </div>

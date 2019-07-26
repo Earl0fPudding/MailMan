@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Input;
 use Session;
+use App\Domain;
 
 class LoginController extends Controller
 {
@@ -15,7 +16,9 @@ class LoginController extends Controller
     }
 
     public function showLogin(Request $request) {
-        return view('login');
+	$domains = Domain::all();
+	$registerable_domains = Domain::where('registerable', true)->get();
+        return view('login', [ 'domains' => $domains, 'registerable_domains' => $registerable_domains ]);
     }
 
     public function showAdminLogin(Request $request){
@@ -48,20 +51,11 @@ class LoginController extends Controller
 	}*/
 
 	// try tp log in
-	if (Auth::attempt(['email' => Input::post('mail'), 'password' => Input::post('password')])) {
+	if (Auth::guard('mail')->attempt($request->only('username', 'password', 'domain_id'))) {
 	   //$user = User::where('username', Input::post('username'))->first();
 	    // set sesion variables
 	    //Session::put('username', Input::post('username'));
 	    //Session::put('role', $user->type);
-            //redirectToUserSpecificPage($request);
-
-	    // redirect to specific user page with info message
-	    /*if(Session::get('role') == 0) {
-                return redirect(route('User.showStartPage'))->with('message', getStatusMessageByCode(101));
-            }
-            if(Session::get('role') == 1) {
-                return redirect(route('Admin.showStartPage'))->with('message', getStatusMessageByCode(101));
-            }*/
 		return redirect(route('Login.showStartPage'));
         } else {
 	    return redirect(route('Login.showLogin'))->with('message', "WRONG LOGIN");
