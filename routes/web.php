@@ -35,3 +35,6 @@ Route::post('/admin/admins/{id}/update', 'AdminController@updateAdmin')->name('A
 Route::get('/admin/admins/{id}/delete', 'AdminController@deleteAdmin')->name('Admin.deleteAdmin');
 Route::post('/admin/changePassword', 'AdminController@changePassword')->name('Admin.changePassword');
 Route::post('/user/changePassword', 'UserController@changePassword')->name('User.changePassword');
+Route::post('/admin/aliases/add', 'AdminController@addAlias')->name('Admin.addAlias');
+Route::post('/admin/aliases/{id}/update', 'AdminController@updateAlias')->name('Admin.updateAlias');
+Route::get('/admin/aliases/{id}/delete', 'AdminController@deleteAlias')->name('Admin.deleteAlias');

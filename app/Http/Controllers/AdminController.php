@@ -9,6 +9,7 @@ use App\User;
 use App\Domain;
 use App\Admin;
 use Hash;
+use App\Alias;
 
 class AdminController extends Controller
 {
@@ -38,7 +39,10 @@ class AdminController extends Controller
     }
 
     public function showAliases(Request $request){
-	return view('showaliases');
+	$aliases = Alias::with(['domain', 'user'])->get();
+	$users = User::with([ 'domain' ])->get();
+	$domains = Domain::all();
+	return view('showaliases', [ 'aliases' => $aliases, 'users' => $users, 'domains' => $domains ]);
     }
 
     public function showInvites(Request $request){
@@ -134,5 +138,31 @@ class AdminController extends Controller
         Admin::destroy($request->id);
 
         return redirect(route('Admin.showAdmins'));
+    }
+
+// --- ALIAS ---
+
+    public function addAlias(Request $request){
+        $alias = new Alias();
+        $alias->source_username = $request->username;
+        $alias->source_domain_id = $request->domain_id;
+	$alias->destination_user_id = $request->user_id;
+        $alias->save();
+
+        return redirect(route('Admin.showAliases'));
+    }
+
+    public function updateAlias(Request $request){
+        $alias = Alias::findOrFail($request->id);
+        $alias->destination_user_id = $request->user_id;
+        $alias->save();
+
+        return redirect(route('Admin.showAliases'));
+    }
+
+    public function deleteAlias(Request $request){
+        Alias::destroy($request->id);
+
+        return redirect(route('Admin.showAliases'));
     }
 }

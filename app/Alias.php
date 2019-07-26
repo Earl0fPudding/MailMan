@@ -13,6 +13,6 @@ class Alias extends Model
     }
 
     public function domain(){
-	return $this->belongsTo('App\Domain');
+	return $this->belongsTo('App\Domain', 'source_domain_id');
     }
 }
