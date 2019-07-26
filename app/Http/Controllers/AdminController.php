@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use App\User;
 use App\Domain;
+use App\Admin;
+use Hash;
 
 class AdminController extends Controller
 {
@@ -30,7 +32,8 @@ class AdminController extends Controller
     }
 
     public function showAdmins(Request $request){
-	return view('showadmins');
+	$admins = Admin::all();
+	return view('showadmins', [ 'admins' => $admins ]);
     }
 
     public function showAliases(Request $request){
@@ -92,5 +95,32 @@ class AdminController extends Controller
         User::destroy($request->id);
 
         return redirect(route('Admin.showUsers'));
+    }
+
+// --- ADMIN ---
+
+    public function addAdmin(Request $request){
+	if($request->password != $request->password_confirm) { return redirect(route('Admin.showAdmins')); }
+        $admin = new Admin();
+        $admin->username = $request->username;
+        $admin->password = Hash::make($request->password);
+        $admin->save();
+
+        return redirect(route('Admin.showAdmins'));
+    }
+
+    public function updateAdmin(Request $request){
+        if($request->password != $request->password_confirm) { return redirect(route('Admin.showAdmins')); }
+	$admin = Admin::findOrFail($request->id);
+        $admin->password = Hash::make($request->password);
+        $admin->save();
+
+        return redirect(route('Admin.showAdmins'));
+    }
+
+    public function deleteAdmin(Request $request){
+        Admin::destroy($request->id);
+
+        return redirect(route('Admin.showAdmins'));
     }
 }

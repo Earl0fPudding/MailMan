@@ -30,3 +30,6 @@ Route::get('/admin/domains/{id}/delete', 'AdminController@deleteDomain')->name('
 Route::post('/admin/users/add', 'AdminController@addUser')->name('Admin.addUser');
 Route::post('/admin/users/{id}/update', 'AdminController@updateUser')->name('Admin.updateUser');
 Route::get('/admin/users/{id}/delete', 'AdminController@deleteUser')->name('Admin.deleteUser');
+Route::post('/admin/admins/add', 'AdminController@addAdmin')->name('Admin.addAdmin');
+Route::post('/admin/admins/{id}/update', 'AdminController@updateAdmin')->name('Admin.updateAdmin');
+Route::get('/admin/admins/{id}/delete', 'AdminController@deleteAdmin')->name('Admin.deleteAdmin');
