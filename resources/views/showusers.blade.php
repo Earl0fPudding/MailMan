@@ -19,7 +19,7 @@
 	    </div>
             <div class="row">
                 <div class="col m12">
-                    <table class="responsive-table striped">
+                    <table class="striped">
 			<thead>
 			    	<tr>
 				    <th>Username</th>
@@ -32,7 +32,10 @@
 				<tr>
 					<td>{{ $user->username }}</td>
 					<td>{{ $user->domain->name }}</td>
-					<td>...</td>
+					<td>
+					    <a class="waves-effect waves-light btn-flat modal-trigger" href="#edit-modal-{{ $user->id }}">Edit</a>
+					    <a href="{{route('Admin.deleteUser', ['id' => $user->id])}}"><button type="button" class="btn-flat">Delete</button></a>
+					</td>
 				</tr>
 			    @endforeach
 			</tbody>
@@ -87,6 +90,34 @@
     </div>
     </form>
   </div>
+
+@foreach($users as $user)
+  <div id="edit-modal-{{ $user->id }}" class="modal">
+    <form method="post" action="{{route('Admin.updateUser', ['id' => $user->id] )}}">
+      <div class="modal-content">
+        <h4>Edit {{ $user->username.'@'.$user->domain->name }}</h4>
+        @csrf
+        <div class="contrainer">
+          <div class="row">
+            <div class="input-field col m12">
+              <input name="password" placeholder="New password" id="p_id" type="password" class="validate" required>
+              <label for="p_id">New password</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col m12">
+              <input name="password_confirm" id="pc_id" placeholder="Confirm new password" type="password" class="validate" required>
+              <label for="pc_id">Confirm new password</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="text-align:center;">
+        <button type="submit" href="#!" class="modal-close waves-effect waves-light btn blue darken-2">Edit</button>
+      </div>
+    </form>
+  </div>
+@endforeach
 
 <script>
 $(document).ready(function(){
