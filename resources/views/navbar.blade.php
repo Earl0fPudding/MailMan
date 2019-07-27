@@ -9,6 +9,7 @@
       <li><a href="{{route('Admin.showDomains')}}">Domains</a></li>
       <li><a href="{{route('Admin.showAliases')}}">Aliases</a></li>
       <li><a href="{{route('Admin.showInvites')}}">Invites</a></li>
+      <li><a href="{{route('Admin.showForbiddenUsernames')}}">Username blacklist</a></li>
       <li><a class="dropdown-trigger" href="#!" data-target="user-dropdown">{{ Auth::guard('admin')->user()->username }}<ion-icon name="arrow-dropdown"></ion-icon></a></li>
      @endif
      @if(auth()->guard('mail')->check())
@@ -30,6 +31,7 @@
       <li><a href="{{route('Admin.showDomains')}}">Domains</a></li>
       <li><a href="{{route('Admin.showAliases')}}">Aliases</a></li>
       <li><a href="{{route('Admin.showInvites')}}">Invites</a></li>
+      <li><a href="{{route('Admin.showForbiddenUsernames')}}">Username blacklist</a></li>
       <div class="divider"></div>
       <li><a href="#change-password-modal" class="modal-trigger">Change password</a></li>
       <li><a href="{{ route('Login.logout') }}">Log out</a></li>

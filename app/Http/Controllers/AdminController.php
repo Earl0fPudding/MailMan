@@ -11,6 +11,7 @@ use App\Admin;
 use Hash;
 use App\Alias;
 use App\Invite;
+use App\ForbiddenUsername;
 
 class AdminController extends Controller
 {
@@ -37,6 +38,11 @@ class AdminController extends Controller
     public function showAdmins(Request $request){
 	$admins = Admin::all();
 	return view('showadmins', [ 'admins' => $admins ]);
+    }
+
+    public function showForbiddenUsernames(Request $request){
+	$forbidden_usernames = ForbiddenUsername::all();
+	return view('showusernameblacklist', ['forbidden_usernames' => $forbidden_usernames]);
     }
 
     public function showAliases(Request $request){
@@ -198,5 +204,21 @@ class AdminController extends Controller
         Invite::destroy($request->id);
 
         return redirect(route('Admin.showInvites'));
+    }
+
+// --- FORBIDDEN USERNAMES ---
+
+    public function addForbiddenUsername(Request $request){
+        $forbiddenusername = new ForbiddenUsername();
+	$forbiddenusername->username = $request->username;
+        $forbiddenusername->save();
+
+        return redirect(route('Admin.showForbiddenUsernames'));
+    }
+
+    public function deleteForbiddenUsername(Request $request){
+        ForbiddenUsername::destroy($request->id);
+
+        return redirect(route('Admin.showForbiddenUsernames'));
     }
 }

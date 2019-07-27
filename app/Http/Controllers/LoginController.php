@@ -9,6 +9,7 @@ use Session;
 use App\Domain;
 use App\User;
 use DB;
+use App\ForbiddenUsername;
 
 class LoginController extends Controller
 {
@@ -36,6 +37,7 @@ class LoginController extends Controller
 	$rules = ['captcha' => 'required|captcha'];
 	$validator = validator()->make(request()->all(), $rules);
 	if ($validator->fails()) { return redirect()->back(); }
+	if(ForbiddenUsername::where('username', 'like', '%'.$request->username.'%')->count() > 0) { return redirect()->back(); }
 	if(!Domain::findOrFail($request->domain_id)->registerable) { return redirect()->back(); }
 	if($request->password!=$request->password_confirm) { return redirect()->back(); }
 

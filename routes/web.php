@@ -23,6 +23,7 @@ Route::get('/admin/admins', 'AdminController@showAdmins')->name('Admin.showAdmin
 Route::get('/admin/aliases', 'AdminController@showAliases')->name('Admin.showAliases');
 Route::get('/admin/invites', 'AdminController@showInvites')->name('Admin.showInvites');
 Route::get('/admin/domains', 'AdminController@showDomains')->name('Admin.showDomains');
+Route::get('/admin/forbiddenusernames', 'AdminController@showForbiddenUsernames')->name('Admin.showForbiddenUsernames');
 Route::post('/admin/domains/add', 'AdminController@addDomain')->name('Admin.addDomain');
 Route::post('/admin/domains/{id}/update', 'AdminController@updateDomain')->name('Admin.updateDomain');
 Route::get('/admin/domains/{id}/delete', 'AdminController@deleteDomain')->name('Admin.deleteDomain');
@@ -43,3 +44,5 @@ Route::post('/admin/invites/{id}/update', 'AdminController@updateInvite')->name(
 Route::get('/admin/invites/{id}/delete', 'AdminController@deleteInvite')->name('Admin.deleteInvite');
 Route::post('/signup', 'LoginController@signup')->name('Login.signup');
 Route::get('/user/dashboard', 'UserController@showDashboard')->name('User.showDashboard');
+Route::post('/admin/forbiddenusernames/add', 'AdminController@addForbiddenUsername')->name('Admin.addForbiddenUsername');
+Route::get('/admin/forbiddenusernames/{id}/delete', 'AdminController@deleteForbiddenUsername')->name('Admin.deleteForbiddenUsername');

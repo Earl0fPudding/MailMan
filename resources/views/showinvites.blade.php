@@ -11,7 +11,7 @@
         <div class="container">
 	    <div class="row">
 		<div class="col m10">
-                    <h2>Invites {{ date('Y-m-d H:i:s') }}</h2>
+                    <h2>Invites</h2>
 		</div>
 		<div class="col m2">
 			<a class="waves-effect waves-light modal-trigger add-button" href="#create-modal"><ion-icon size="large" name="add-circle"></ion-icon></a>
