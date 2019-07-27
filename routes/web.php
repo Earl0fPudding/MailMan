@@ -46,3 +46,4 @@ Route::post('/signup', 'LoginController@signup')->name('Login.signup');
 Route::get('/user/dashboard', 'UserController@showDashboard')->name('User.showDashboard');
 Route::post('/admin/forbiddenusernames/add', 'AdminController@addForbiddenUsername')->name('Admin.addForbiddenUsername');
 Route::get('/admin/forbiddenusernames/{id}/delete', 'AdminController@deleteForbiddenUsername')->name('Admin.deleteForbiddenUsername');
+Route::post('/invitesignup', 'LoginController@invitesignup')->name('Login.invitesignup');

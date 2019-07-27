@@ -10,6 +10,7 @@ use App\Domain;
 use App\User;
 use DB;
 use App\ForbiddenUsername;
+use App\Invite;
 
 class LoginController extends Controller
 {
@@ -31,6 +32,33 @@ class LoginController extends Controller
     public function logout(Request $request) {
 	Session::flush();
 	return redirect(route('Login.showLogin'));
+    }
+
+    public function processInvite(Request $request){
+	$invite = Invite::where('token', $request->token)->with('domain')->first();
+	if($invite->termination_date<date("Y-m-d H:i:s")) { return redirect(route('Login.showLogin')); }
+	session()->put('name_preset', $invite->name_preset);
+	session()->put('domain_id', $invite->domain_id);
+	session()->put('domain_name', $invite->domain->name);
+	$invite->delete();
+
+	return view('invitesignup');
+    }
+
+    public function invitesignup(Request $request){
+	if($request->password!=$request->password_confirm) { return redirect(route('Login.logout')); }
+	$user = new User();
+	if(session('name_preset')!==null){
+	    $user->username = session('name_preset');
+	} else {
+	    if(ForbiddenUsername::where('username', 'like', '%'.$request->username.'%')->count() > 0) { return redirect(route('Login.logout')); }
+	    $user->username = $request->username;
+	}
+	$user->password = json_decode(json_encode(DB::select(DB::raw("SELECT ENCRYPT(:password, CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))) as hash"), [ 'password' => $request->password ])), true)[0]['hash'];
+	$user->domain_id = session('domain_id');
+	$user->save();
+
+	return redirect(route('Login.logout'));
     }
 
     public function signup(Request $request){
