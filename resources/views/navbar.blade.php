@@ -19,12 +19,20 @@
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
+      <li class="logo center">
+        <a id="logo-container" href="/" class="brand-logo">
+            <img style="height: auto; width: 55px;" src="{{ asset('images/MailMan_Logo.svg') }}">
+        </a>
+      </li>
     @if(auth()->guard('admin')->check())
       <li><a href="{{route('Admin.showUsers')}}">Mail users</a></li>
       <li><a href="{{route('Admin.showAdmins')}}">Admins</a></li>
       <li><a href="{{route('Admin.showDomains')}}">Domains</a></li>
       <li><a href="{{route('Admin.showAliases')}}">Aliases</a></li>
       <li><a href="{{route('Admin.showInvites')}}">Invites</a></li>
+      <div class="divider"></div>
+      <li><a href="#change-password-modal" class="modal-trigger">Change password</a></li>
+      <li><a href="{{ route('Login.logout') }}">Log out</a></li>
      @endif
      @if(auth()->guard('mail')->check())
       <li>...</li>

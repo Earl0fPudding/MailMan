@@ -38,3 +38,7 @@ Route::post('/user/changePassword', 'UserController@changePassword')->name('User
 Route::post('/admin/aliases/add', 'AdminController@addAlias')->name('Admin.addAlias');
 Route::post('/admin/aliases/{id}/update', 'AdminController@updateAlias')->name('Admin.updateAlias');
 Route::get('/admin/aliases/{id}/delete', 'AdminController@deleteAlias')->name('Admin.deleteAlias');
+Route::get('/invite/{token}', 'LoginController@processInvite')->name('Login.processInvite');
+Route::post('/admin/invites/add', 'AdminController@addInvite')->name('Admin.addInvite');
+Route::post('/admin/invites/{id}/update', 'AdminController@updateInvite')->name('Admin.updateInvite');
+Route::get('/admin/invites/{id}/delete', 'AdminController@deleteInvite')->name('Admin.deleteInvite');
