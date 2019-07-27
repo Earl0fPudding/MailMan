@@ -29,6 +29,10 @@ class LoginController extends Controller
 	return view('adminlogin');
     }
 
+    public function showAbout(Request $request){
+	return view('about');
+    }
+
     public function logout(Request $request) {
 	Session::flush();
 	return redirect(route('Login.showLogin'));
