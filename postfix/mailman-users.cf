@@ -1,0 +1,5 @@
+user = dbusername
+password = dbpassword
+hosts = 127.0.0.1
+dbname = dbname
+query = SELECT 1 FROM (SELECT CONCAT(u.username, '@', d.name) as email, password FROM users u JOIN domains d ON (u.domain_id=d.id)) x WHERE email='%s';

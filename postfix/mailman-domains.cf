@@ -1,0 +1,6 @@
+user = dbusername
+password = dbpassword
+hosts = 127.0.0.1
+dbname = dbname
+query = SELECT 1 FROM domains WHERE name='%s'
+

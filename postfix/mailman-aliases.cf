@@ -1,0 +1,5 @@
+user = dbusername
+password = dbpassword
+hosts = 127.0.0.1
+dbname = dbname
+query = SELECT CONCAT(u.username, '@', d.name) FROM (SELECT CONCAT(a.source_username, '@', d.name) as source_email, destination_user_id FROM aliases a JOIN domains d ON (a.source_domain_id=d.id)) x JOIN users u ON (x.destination_user_id=u.id) JOIN domains d ON (u.domain_id=d.id) WHERE x.source_email='%s'
