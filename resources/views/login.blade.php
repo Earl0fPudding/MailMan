@@ -63,7 +63,7 @@
 @include('footer')
 <div id="signup-modal" class="modal">
     <div class="modal-content">
-      <form method="post" action="#">
+      <form method="post" action="{{ route('Login.signup') }}">
       <h4>Sign up a new mail account</h4>
 	<div class="container">
         @csrf

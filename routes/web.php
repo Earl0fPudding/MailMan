@@ -42,3 +42,4 @@ Route::get('/invite/{token}', 'LoginController@processInvite')->name('Login.proc
 Route::post('/admin/invites/add', 'AdminController@addInvite')->name('Admin.addInvite');
 Route::post('/admin/invites/{id}/update', 'AdminController@updateInvite')->name('Admin.updateInvite');
 Route::get('/admin/invites/{id}/delete', 'AdminController@deleteInvite')->name('Admin.deleteInvite');
+Route::post('/signup', 'LoginController@signup')->name('Login.signup');

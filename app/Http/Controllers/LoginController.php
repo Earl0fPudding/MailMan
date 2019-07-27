@@ -7,6 +7,8 @@ use Auth;
 use Illuminate\Support\Facades\Input;
 use Session;
 use App\Domain;
+use App\User;
+use DB;
 
 class LoginController extends Controller
 {
@@ -24,6 +26,7 @@ class LoginController extends Controller
     public function showAdminLogin(Request $request){
 	return view('adminlogin');
     }
+
     public function logout(Request $request) {
 	Session::flush();
 	return redirect(route('Login.showLogin'));
@@ -31,6 +34,22 @@ class LoginController extends Controller
 
     public function showStartPage(Request $request){
 	return view('userstartpage');
+    }
+
+    public function signup(Request $request){
+	$rules = ['captcha' => 'required|captcha'];
+	$validator = validator()->make(request()->all(), $rules);
+	if ($validator->fails()) { return redirect()->back(); }
+	if(!Domain::findOrFail($request->domain_id)->registerable) { return redirect()->back(); }
+	if($request->password!=$request->password_confirm) { return redirect()->back(); }
+
+	$user = new User();
+        $user->username = $request->username;
+        $user->password = json_decode(json_encode(DB::select(DB::raw("SELECT ENCRYPT(:password, CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))) as hash"), [ 'password' => $request->password ])), true)[0]['hash'];
+        $user->domain_id = $request->domain_id;
+        $user->save();
+
+	return redirect(route('Login.showLogin'));
     }
 
     public function adminLogin(Request $request){
