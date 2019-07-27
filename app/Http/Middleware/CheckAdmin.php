@@ -17,7 +17,7 @@ class CheckAdmin
     {
 	if(!auth()->guard('admin')->check()) {
 	    if(auth()->guard('mail')->check()) {
-                return redirect(route('User.showStartpage'));
+                return redirect(route('User.showDashboard'));
             }
             return redirect(route('Login.showAdminLogin'));
         }

@@ -16,7 +16,7 @@ class RedirectIfLoggedIn
     public function handle($request, Closure $next)
     {
 	if(auth()->guard('mail')->check()) {
-            return redirect(route('User.showStartpage'));
+            return redirect(route('User.showDashboard'));
         }
 	if(auth()->guard('admin')->check()) {
             return redirect(route('Admin.showDashboard'));

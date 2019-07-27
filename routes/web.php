@@ -12,7 +12,6 @@
 */
 
 Route::get('/', 'LoginController@showLogin')->name('Login.showLogin');
-Route::get('/start', 'LoginController@showStartPage')->name('Login.showStartPage');
 Route::post('/login', 'LoginController@login')->name('Login.login');
 Route::get('/logout', 'LoginController@logout')->name('Login.logout');
 Route::get('/refreshCaptcha', 'CaptchaController@refreshCaptcha')->name('Captcha.refreshCaptcha');
@@ -43,3 +42,4 @@ Route::post('/admin/invites/add', 'AdminController@addInvite')->name('Admin.addI
 Route::post('/admin/invites/{id}/update', 'AdminController@updateInvite')->name('Admin.updateInvite');
 Route::get('/admin/invites/{id}/delete', 'AdminController@deleteInvite')->name('Admin.deleteInvite');
 Route::post('/signup', 'LoginController@signup')->name('Login.signup');
+Route::get('/user/dashboard', 'UserController@showDashboard')->name('User.showDashboard');

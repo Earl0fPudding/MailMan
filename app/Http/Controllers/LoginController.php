@@ -32,10 +32,6 @@ class LoginController extends Controller
 	return redirect(route('Login.showLogin'));
     }
 
-    public function showStartPage(Request $request){
-	return view('userstartpage');
-    }
-
     public function signup(Request $request){
 	$rules = ['captcha' => 'required|captcha'];
 	$validator = validator()->make(request()->all(), $rules);
@@ -75,7 +71,7 @@ class LoginController extends Controller
 	    // set sesion variables
 	    //Session::put('username', Input::post('username'));
 	    //Session::put('role', $user->type);
-		return redirect(route('Login.showStartPage'));
+		return redirect(route('User.showDashboard'));
         } else {
 	    return redirect(route('Login.showLogin'))->with('message', "WRONG LOGIN");
 	}

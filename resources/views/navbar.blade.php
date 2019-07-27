@@ -12,7 +12,7 @@
       <li><a class="dropdown-trigger" href="#!" data-target="user-dropdown">{{ Auth::guard('admin')->user()->username }}<ion-icon name="arrow-dropdown"></ion-icon></a></li>
      @endif
      @if(auth()->guard('mail')->check())
-      <li>...</li>
+      <li><a class="dropdown-trigger" href="#!" data-target="user-dropdown">{{ Auth::guard('mail')->user()->username.'@'.Auth::guard('mail')->user()->domain->name }}<ion-icon name="arrow-dropdown"></ion-icon></a></li>
      @endif
     </ul>
   </div>
@@ -35,7 +35,8 @@
       <li><a href="{{ route('Login.logout') }}">Log out</a></li>
      @endif
      @if(auth()->guard('mail')->check())
-      <li>...</li>
+        <li><a href="#change-password-modal" class="modal-trigger">Change password</a></li>
+        <li><a href="{{ route('Login.logout') }}">Log out</a></li>
      @endif
 </ul>
 
