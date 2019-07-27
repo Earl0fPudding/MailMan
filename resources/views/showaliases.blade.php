@@ -82,12 +82,13 @@
             </div>
 	    <div class="row">
 	      <div class="input-field col m12">
-		<select name="user_id">
-		  <option value="" selected disabled>Choose a domain</option>
+		<select name="user_id" id="user_id">
+		  <option value="" selected disabled>Choose a mail address</option>
                 @foreach($users as $user)
                   <option value="{{ $user->id }}">{{ $user->username.'@'.$user->domain->name }}</option>
                 @endforeach
                 </select>
+		<label for="user_id">Destination address</label>
 	      </div>
 	    </div>
 	  </div>

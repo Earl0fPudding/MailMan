@@ -10,6 +10,7 @@ use App\Domain;
 use App\Admin;
 use Hash;
 use App\Alias;
+use App\Invite;
 
 class AdminController extends Controller
 {
@@ -46,7 +47,9 @@ class AdminController extends Controller
     }
 
     public function showInvites(Request $request){
-	return view('showinvites');
+	$invites = Invite::with('domain')->get();
+	$domains = Domain::all();
+	return view('showinvites', [ 'invites' => $invites, 'domains' => $domains ]);
     }
 
     public function changePassword(Request $request){
@@ -164,5 +167,36 @@ class AdminController extends Controller
         Alias::destroy($request->id);
 
         return redirect(route('Admin.showAliases'));
+    }
+
+// --- INVITE ---
+
+    public function addInvite(Request $request){
+        $invite = new Invite();
+	do {
+        $invite->token = str_replace('.', '0', str_replace('/', '0', substr(Hash::make('Lelouch'), 7, -3)));
+	} while(Invite::where('token', $invite->token)->count()>0);
+        if(isset($request->name_preset)){
+	    $invite->name_preset = $request->name_preset;
+	}
+        $invite->termination_date = $request->termination_date.' '.$request->termiantion_time;
+	$invite->domain_id = $request->domain_id;
+        $invite->save();
+
+        return redirect(route('Admin.showInvites'));
+    }
+
+    public function updateInvite(Request $request){
+        $invite = Invite::findOrFail($request->id);
+        // not needed yet
+        $invite->save();
+
+        return redirect(route('Admin.showInvites'));
+    }
+
+    public function deleteInvite(Request $request){
+        Invite::destroy($request->id);
+
+        return redirect(route('Admin.showInvites'));
     }
 }
