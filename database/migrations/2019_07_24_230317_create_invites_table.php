@@ -17,7 +17,7 @@ class CreateInvitesTable extends Migration
             $table->bigIncrements('id');
             $table->string('token', 50)->nullable($value = false);
             $table->string('name_preset', 100)->nullable($value = true);
-            $table->dateTime('ttl')->nullable($value = false);
+            $table->dateTime('termination_date')->nullable($value = false);
             $table->unsignedBigInteger('domain_id')->nullable($value = false);
             $table->foreign('domain_id')->references('id')->on('domains');
             $table->timestamps();
