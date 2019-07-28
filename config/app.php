@@ -177,6 +177,9 @@ return [
 
 	// CAPTCHA
         Mews\Captcha\CaptchaServiceProvider::class,
+
+	// helper provider
+	App\Providers\HelperServiceProvider::class,
     ],
 
     /*

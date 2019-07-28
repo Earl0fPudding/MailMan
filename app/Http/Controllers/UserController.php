@@ -21,7 +21,7 @@ class UserController extends Controller
         $loggedin_user = Auth::guard('mail')->user();
         if($request->password == $request->password_confirm){
             if(Hash::check($request->old_password, $loggedin_user->password)){
-                $loggedin_user->password = Hash::make($request->password);
+                $loggedin_user->password = sha512_make($request->password);
                 $loggedin_user->save();
             }
         }

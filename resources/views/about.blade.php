@@ -13,7 +13,7 @@ We respect your privacy, so we won't use cookies to track you, store any cookies
         <div class="container">
             <div class="row">
 		<h3 class="center">About MailMan</h3>
-		<h6 class="center">Version 0.0.1</h6>
+		<!-- <h6 class="center">Version 0.0.1</h6> -->
 	    </div>
 	    <div class="row">
 		<div class="col m2 offset-m5 s12">

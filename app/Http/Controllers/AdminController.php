@@ -100,7 +100,7 @@ class AdminController extends Controller
 	if($request->password != $request->password_confirm) { return redirect(route('Admin.showUsers')); }
 	$user = new User();
 	$user->username = $request->username;
-	$user->password = json_decode(json_encode(DB::select(DB::raw("SELECT ENCRYPT(:password, CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))) as hash"), [ 'password' => $request->password ])), true)[0]['hash'];
+	$user->password = sha512_make($request->password);
         $user->domain_id = $request->domain_id;
         $user->save();
 
@@ -110,7 +110,7 @@ class AdminController extends Controller
     public function updateUser(Request $request){
 	if($request->password != $request->password_confirm) { return redirect(route('Admin.showUsers')); }
         $user = User::findOrFail($request->id);
-	$user->password = json_decode(json_encode(DB::select(DB::raw("SELECT ENCRYPT(:password, CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))) as hash"), [ 'password' => $request->password ])), true)[0]['hash'];
+	$user->password = sha512_make($request->password);
         $user->save();
 
         return redirect(route('Admin.showUsers'));
