@@ -36,7 +36,7 @@ class LoginController extends Controller
 
     public function logout(Request $request) {
 	Session::flush();
-	return redirect(route('Login.showLogin'));
+	return redirect(route('Login.showLogin'))->withSuccess(get_message('succ-logout'));
     }
 
     public function processInvite(Request $request){
@@ -63,29 +63,37 @@ class LoginController extends Controller
 	$user->domain_id = session('domain_id');
 	$user->save();
 
-	return redirect(route('Login.logout'));
+	Session::flush();
+	return redirect(route('Login.showLogin'))->withSuccess(get_message('succ-signup'));
     }
 
     public function signup(Request $request){
-	$rules = ['captcha' => 'required|captcha'];
-	$validator = validator()->make(request()->all(), $rules);
-	if ($validator->fails()) { return redirect()->back(); }
-	if(ForbiddenUsername::where('username', 'like', '%'.$request->username.'%')->count() > 0) { return redirect()->back(); }
-	if(!Domain::findOrFail($request->domain_id)->registerable) { return redirect()->back(); }
-	if($request->password!=$request->password_confirm) { return redirect()->back(); }
+	$validator = Validator::make($request->all(), [
+            'username_signup' => 'required|max:50',
+            'domain_id_signup' => 'required|integer',
+            'password_signup' => 'required|same:password_confirm',
+	    'password_confirm' => 'required',
+	    'captcha' => 'required|captcha'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+	if(ForbiddenUsername::where('username', 'like', '%'.$request->username_signup.'%')->count() > 0) { return redirect()->back(); }
+	if(!Domain::findOrFail($request->domain_id_signup)->registerable) { return redirect()->back(); }
 
 	$user = new User();
-        $user->username = $request->username;
-        $user->password = sha512_make($request->password);
-        $user->domain_id = $request->domain_id;
+        $user->username = $request->username_signup;
+        $user->password = sha512_make($request->password_signup);
+        $user->domain_id = $request->domain_id_signup;
         $user->save();
 
-	return redirect(route('Login.showLogin'));
+	Session::flush();
+	return redirect(route('Login.showLogin'))->withSuccess(get_message('succ-signup'));
     }
 
     public function adminLogin(Request $request){
 	if (Auth::guard('admin')->attempt($request->only('username', 'password'))) {
-		return redirect(route('Admin.showDashboard'))->with('success', "Logged in!");
+		return redirect(route('Admin.showDashboard'))->withSuccess(get_message('succ-login'));
 	} else { return redirect(route('Login.showAdminLogin')); }
     }
 
@@ -97,19 +105,14 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 	if ($validator->fails()) {
-//	    Session::flash('message', $validator->messages()->first());
-	return redirect()->back()->withErrors($validator)->withInput();
+	    return redirect()->back()->withErrors($validator)->withInput();
 	}
 
-	// try tp log in
+	// try to log in
 	if (Auth::guard('mail')->attempt($request->only('username', 'password', 'domain_id'))) {
-	   //$user = User::where('username', Input::post('username'))->first();
-	    // set sesion variables
-	    //Session::put('username', Input::post('username'));
-	    //Session::put('role', $user->type);
-		return redirect(route('User.showDashboard'));
+		return redirect(route('User.showDashboard'))->withSuccess(get_message('succ-login'));
         } else {
-	    return redirect(route('Login.showLogin'))->with('message', "WRONG LOGIN");
+	    return redirect(route('Login.showLogin'))->withErrors(get_message('err-login'))->withInput();
 	}
     }
 }

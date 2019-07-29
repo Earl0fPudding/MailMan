@@ -8,7 +8,6 @@ We respect your privacy, so we won't use cookies to track you, store any cookies
     </head>
     <body>
 @include('cookieConsent::index')
-@include('navbar')
     <main>
         <div class="container">
             <div class="row">
