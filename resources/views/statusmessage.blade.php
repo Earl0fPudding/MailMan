@@ -1,7 +1,7 @@
 @if(session('success'))
     <script>
         $(document).ready(function() {
-	    M.toast({html: '{{ session("success") }}', displayLength: 5000, classes: 'blue darken-2'});
+	    M.toast({html: '{{ session("success") }}', displayLength: 6000, classes: 'blue'});
         });
     </script>
 @endif
@@ -10,7 +10,7 @@
 <script>
 	$(document).ready(function() {
 		@foreach ($errors->all() as $error)
-		M.toast({html: '{{ $error }}', displayLength: 5000, classes: 'red darken-2'});
+		M.toast({html: '{{ $error }}', displayLength: 6000, classes: 'red darken-2'});
 		@endforeach
 	});
 </script>
