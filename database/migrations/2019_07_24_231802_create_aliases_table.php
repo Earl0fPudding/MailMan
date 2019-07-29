@@ -15,7 +15,7 @@ class CreateAliasesTable extends Migration
     {
         Schema::create('aliases', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('source_username', 100)->nullable($value = false);
+            $table->string('source_username', 50)->nullable($value = false);
             $table->unsignedBigInteger('source_domain_id')->nullable($value = false);
             $table->foreign('source_domain_id')->references('id')->on('domains')->onDelete('cascade');
             $table->unsignedBigInteger('destination_user_id')->nullable($value = false);

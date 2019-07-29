@@ -15,7 +15,7 @@ class CreateForbiddenUsernamesTable extends Migration
     {
         Schema::create('forbidden_usernames', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('username', 128)->nullable($value = false);
+            $table->string('username', 50)->nullable($value = false);
             $table->timestamps();
         });
     }
