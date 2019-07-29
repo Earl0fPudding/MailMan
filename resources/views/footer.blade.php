@@ -4,3 +4,4 @@
             <a href="{{ route('Login.showAbout') }}" class="col m2 grey-text text-lighten-4 right">About</a>
         </div>
     </footer>
+@include('statusmessage')

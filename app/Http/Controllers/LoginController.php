@@ -11,6 +11,7 @@ use App\User;
 use DB;
 use App\ForbiddenUsername;
 use App\Invite;
+use Validator;
 
 class LoginController extends Controller
 {
@@ -84,20 +85,21 @@ class LoginController extends Controller
 
     public function adminLogin(Request $request){
 	if (Auth::guard('admin')->attempt($request->only('username', 'password'))) {
-		return redirect(route('Admin.showDashboard'));
+		return redirect(route('Admin.showDashboard'))->with('success', "Logged in!");
 	} else { return redirect(route('Login.showAdminLogin')); }
     }
 
     public function login(Request $request) {
 	// validate the given input
-/*	$validator = Validator::make($request->all(), [
-            'username' => 'required|max:45',
+	$validator = Validator::make($request->all(), [
+            'username' => 'required|max:50',
+	    'domain_id' => 'required|integer',
             'password' => 'required',
-        ], getValidatorMessages());
+        ]);
 	if ($validator->fails()) {
-	    Session::flash('message', $validator->messages()->first());
-            return redirect()->back()->withInput();
-	}*/
+//	    Session::flash('message', $validator->messages()->first());
+	return redirect()->back()->withErrors($validator)->withInput();
+	}
 
 	// try tp log in
 	if (Auth::guard('mail')->attempt($request->only('username', 'password', 'domain_id'))) {
