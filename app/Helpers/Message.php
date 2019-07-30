@@ -11,13 +11,14 @@ function get_message($short){
 		case 'succ-pw-change': return "Password successfully changed!";
 
 		case 'err-login': return "Wrong username or password!";
-		case 'err-invite-time': return "Invite expired!";
 		case 'err-forbidden-username': return "Username not appropriate!";
 		case 'err-domain-registerable': return "Selected domain is not registerable!";
 		case 'err-pw-change-old': return "Old password is wrong!";
 		case 'err-unknown': return "Unknown error!";
 		case 'err-username-exists': return "Username already exists!";
 		case 'err-domainname-exists': return "Domain name already exists!";
+		case 'err-invite-expired': return "Invite link expired!";
+		case 'err-invite-invalid': return "Invite Link invalid!";
 	}
 }
 
