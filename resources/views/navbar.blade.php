@@ -60,26 +60,26 @@
         <div class="contrainer">
           <div class="row">
             <div class="input-field col m12">
-              <input name="old_password" placeholder="Old password" id="op_id" type="password" class="validate" required>
-              <label for="op_id">Old password</label>
+              <input name="old_password" placeholder="Old password" id="op_id_cp" type="password" class="validate" required>
+              <label for="op_id_cp">Old password</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col m12">
-              <input name="password" placeholder="New password" id="p_id" type="password" class="validate" required>
-              <label for="p_id">New password</label>
+              <input name="password_cp" placeholder="New password" id="p_id_cp" type="password" class="validate" required>
+              <label for="p_id_cp">New password</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col m12">
-              <input name="password_confirm" id="pc_id" placeholder="Confirm new password" type="password" class="validate" required>
-              <label for="pc_id">Confirm new password</label>
+              <input name="password_confirm_cp" id="pc_id_cp" placeholder="Confirm new password" type="password" class="validate" required>
+              <label for="pc_id_cp">Confirm new password</label>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer" style="text-align:center;">
-        <button type="submit" href="#!" class="modal-close waves-effect waves-light btn blue darken-2">Change password</button>
+        <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Change password</button>
       </div>
     </form>
   </div>
@@ -89,5 +89,8 @@ $(document).ready(function(){
     $('.sidenav').sidenav();
     $(".dropdown-trigger").dropdown();
     $('.modal').modal();
+    @if(old('password_cp'))
+    $('#change-password-modal').modal('open');
+    @endif
 });
 </script>

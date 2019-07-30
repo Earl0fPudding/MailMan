@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
+use Validator;
 
 class UserController extends Controller
 {
@@ -18,13 +19,22 @@ class UserController extends Controller
     }
 
     public function changePassword(Request $request){
-        $loggedin_user = Auth::guard('mail')->user();
-        if($request->password == $request->password_confirm){
-            if(Hash::check($request->old_password, $loggedin_user->password)){
-                $loggedin_user->password = sha512_make($request->password);
-                $loggedin_user->save();
-            }
+	$validator = Validator::make($request->all(), [
+	    'old_password' => 'required',
+            'password_cp' => 'required|same:password_confirm_cp',
+	    'password_confirm_cp' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
-        return redirect()->back();
+
+        $loggedin_user = Auth::guard('mail')->user();
+        if(Hash::check($request->old_password, $loggedin_user->password)){
+            $loggedin_user->password = sha512_make($request->password);
+            $loggedin_user->save();
+        } else {
+	    return redirect()->back()->withErrors(get_message('err-pw-change-old'))->withInput();
+	}
+        return redirect()->back()->withSuccess(get_message('succ-pw-change'));
     }
 }

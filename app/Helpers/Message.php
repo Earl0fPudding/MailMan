@@ -8,11 +8,13 @@ function get_message($short){
                 case 'succ-create': return "Successfully created!";
                 case 'succ-delete': return "Successfully deleted!";
                 case 'succ-update': return "Successfully updated!";
+		case 'succ-pw-change': return "Password successfully changed!";
 
 		case 'err-login': return "Wrong username or password!";
 		case 'err-invite-time': return "Invite expired!";
 		case 'err-forbidden-username': return "Username not appropriate!";
 		case 'err-domain-registerable': return "Selected domain is not registerable!";
+		case 'err-pw-change-old': return "Old password is wrong!";
 	}
 }
 

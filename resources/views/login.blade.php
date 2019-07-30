@@ -121,7 +121,7 @@
 $(document).ready(function(){
     $('.modal').modal();
     @if(old('captcha'))
-    $('.modal').modal('open');
+    $('#signup-modal').modal('open');
     @endif
     $('select').formSelect();
   });
