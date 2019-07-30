@@ -20,7 +20,7 @@
 	        @csrf
       		    <div class="row">
           		<div class="input-field col m6">
-              		    <input name="username" id="u_id" type="text" class="validate @error('username') invalid @enderror" @if(session('name_preset')!==null) value="{{ session('name_preset') }}" disabled @else value="{{ old('username') }}" @endif required>
+              		    <input name="username" id="u_id" type="text" data-length="50" class="input-text validate @error('username') invalid @enderror" @if(session('name_preset')!==null) value="{{ session('name_preset') }}" disabled @else value="{{ old('username') }}" @endif required>
               		    <label for="u_id">Username</label>
           		</div>
           		<div class="col m6">
@@ -51,5 +51,10 @@
         </div>
     </main>
 @include('footer')
+<script>
+$(document).ready(function(){
+    $('input.input-text').characterCounter();
+});
+</script>
     </body>
 </html>

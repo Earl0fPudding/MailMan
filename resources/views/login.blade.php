@@ -69,7 +69,7 @@
         @csrf
       <div class="row">
           <div class="input-field col m6 s12">
-              <input name="username_signup" value="{{ old('username_signup') }}" id="u_id_s" type="text" class="@error('username') invalid @enderror validate" required>
+              <input name="username_signup" value="{{ old('username_signup') }}" id="u_id_s" type="text" data-length="50" class="input-text @error('username') invalid @enderror validate" required>
               <label for="u_id_s">Username</label>
           </div>
           <div class="col m1 valign-wrapper s2">
@@ -124,6 +124,7 @@ $(document).ready(function(){
     $('#signup-modal').modal('open');
     @endif
     $('select').formSelect();
+    $('input.input-text').characterCounter();
   });
 
 $('#refreshCaptcha').on('click', function(e){
