@@ -12,6 +12,7 @@ use DB;
 use App\ForbiddenUsername;
 use App\Invite;
 use Validator;
+use Illuminate\Validation\Rule;
 
 class LoginController extends Controller
 {
@@ -66,6 +67,9 @@ class LoginController extends Controller
 	    if(ForbiddenUsername::where('username', 'like', '%'.$request->username.'%')->count() > 0) {
 		return redirect()->back()->withErrors(get_message('err-forbidden-username'))->withInput();
 	    }
+	    if(User::where(['username' => $request->username, 'domain_id' => session('domain_id')])->count() > 0) {
+            return redirect()->back()->withErrors(get_message('err-username-exists'))->withInput();
+        }
 	    $user->username = $request->username;
 	}
 	$user->password = sha512_make($request->password);
@@ -87,6 +91,9 @@ class LoginController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+	if(User::where(['username' => $request->username_signup, 'domain_id' => $request->domain_id_signup])->count() > 0) {
+	    return redirect()->back()->withErrors(get_message('err-username-exists'))->withInput();
+	}
 	if(ForbiddenUsername::where('username', 'like', '%'.$request->username_signup.'%')->count() > 0) {
 	    return redirect()->back()->withErrors(get_message('err-forbidden-username'))->withInput();
 	}

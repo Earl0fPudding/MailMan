@@ -15,6 +15,9 @@ function get_message($short){
 		case 'err-forbidden-username': return "Username not appropriate!";
 		case 'err-domain-registerable': return "Selected domain is not registerable!";
 		case 'err-pw-change-old': return "Old password is wrong!";
+		case 'err-unknown': return "Unknown error!";
+		case 'err-username-exists': return "Username already exists!";
+		case 'err-domainname-exists': return "Domain name already exists!";
 	}
 }
 
