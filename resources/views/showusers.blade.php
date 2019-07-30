@@ -54,7 +54,7 @@
           <div class="container">
             <div class="row">
               <div class="input-field col m6 s12">
-              <input name="username" id="u_id" type="text" class="validate" required>
+              <input name="username" id="u_id" type="text" data-length="50" value="{{ old('username') }}" class="validate input-text @error('username') invalid @enderror" required>
               <label for="u_id">Username</label>
           </div>
           <div class="col m1 valign-wrapper s2">
@@ -62,9 +62,9 @@
           </div>
           <div class="input-field col m5 s10">
               <select id="d_id" name="domain_id">
-                  <option value="" disabled selected>Choose a domain</option>
+                  @if(sizeof($domains)==0) <option value="" disabled selected>No domains available</option> @endif
 		  @foreach($domains as $domain)
-		    <option value="{{ $domain->id }}">{{ $domain->name }}</option>
+		    <option value="{{ $domain->id }}" @if(old('domain_id')==$domain->id) selected @endif  >{{ $domain->name }}</option>
 		  @endforeach
               </select>
               <label for="d_id">Domain</label>
@@ -73,20 +73,20 @@
             </div>
             <div class="row">
           <div class="input-field col m12">
-              <input name="password" id="p_id" type="password" class="validate" required>
+              <input name="password" id="p_id" type="password" class="validate @error('password') invalid @enderror" required>
               <label for="p_id">Password</label>
           </div>
       </div>
       <div class="row">
           <div class="input-field col m12">
-              <input name="password_confirm" id="pc_id" type="password" class="validate" required>
+              <input name="password_confirm" id="pc_id" type="password" class="validate @error('password_confirm') invalid @enderror" required>
               <label for="pc_id">Confirm password</label>
           </div>
       </div>
           </div>
     </div>
     <div class="modal-footer" style="text-align:center;">
-      <button type="submit" href="#!" class="modal-close waves-effect waves-light btn blue darken-2">Add</button>
+      <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Add</button>
     </div>
     </form>
   </div>
@@ -94,26 +94,27 @@
 @foreach($users as $user)
   <div id="edit-modal-{{ $user->id }}" class="modal">
     <form method="post" action="{{route('Admin.updateUser', ['id' => $user->id] )}}">
+	<input type="text" name="user_id" value="{{$user->id}}" hidden>
       <div class="modal-content">
         <h4>Edit {{ $user->username.'@'.$user->domain->name }}</h4>
         @csrf
         <div class="contrainer">
           <div class="row">
             <div class="input-field col m12">
-              <input name="password" placeholder="New password" id="p_id" type="password" class="validate" required>
-              <label for="p_id">New password</label>
+              <input name="password_update" placeholder="New password" id="p_id_{{$user->id}}" type="password" class="validate @error('password_update') invalid @enderror" required>
+              <label for="p_id_{{$user->id}}">New password</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col m12">
-              <input name="password_confirm" id="pc_id" placeholder="Confirm new password" type="password" class="validate" required>
-              <label for="pc_id">Confirm new password</label>
+              <input name="password_confirm_update" id="pc_id_{{$user->id}}" placeholder="Confirm new password" type="password" class="validate @error('password_confirm_update') invalid @enderror" required>
+              <label for="pc_id_{{$user->id}}">Confirm new password</label>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer" style="text-align:center;">
-        <button type="submit" href="#!" class="modal-close waves-effect waves-light btn blue darken-2">Edit</button>
+        <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Edit</button>
       </div>
     </form>
   </div>
@@ -123,6 +124,13 @@
 $(document).ready(function(){
     $('.modal').modal();
     $('select').formSelect();
+    $('input.input-text').characterCounter();
+    @if(old('username'))
+    $('#create-modal').modal('open');
+    @endif
+    @if(old('user_id'))
+    $('#edit-modal-{{old("user_id")}}').modal('open');
+    @endif
   });
 
 </script>

@@ -100,7 +100,6 @@ class AdminController extends Controller
     public function updateDomain(Request $request){
 	$validator = Validator::make($request->all(), [
             'registerable_update' => 'integer',
-	    'id' => 'integer'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -121,23 +120,42 @@ class AdminController extends Controller
 // --- USER ---
 
     public function addUser(Request $request){
-	if($request->password != $request->password_confirm) { return redirect(route('Admin.showUsers')); }
+	$validator = Validator::make($request->all(), [
+            'username' => 'required|max:50',
+            'password' => 'required|same:password_confirm',
+	    'password_confirm' => 'required',
+	    'domain_id' => 'required|integer'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+	if(User::where(['username' => $request->username, 'domain_id' => session('domain_id')])->count() > 0) {
+            return redirect()->back()->withErrors(get_message('err-username-exists'))->withInput();
+        }
+
 	$user = new User();
 	$user->username = $request->username;
 	$user->password = sha512_make($request->password);
         $user->domain_id = $request->domain_id;
         $user->save();
 
-        return redirect(route('Admin.showUsers'));
+        return redirect(route('Admin.showUsers'))->withSuccess(get_message('succ-create'));
     }
 
     public function updateUser(Request $request){
-	if($request->password != $request->password_confirm) { return redirect(route('Admin.showUsers')); }
-        $user = User::findOrFail($request->id);
-	$user->password = sha512_make($request->password);
+	$validator = Validator::make($request->all(), [
+            'password_update' => 'required|same:password_confirm_update',
+            'password_confirm_update' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+	$user = User::findOrFail($request->id);
+	$user->password = sha512_make($request->password_update);
         $user->save();
 
-        return redirect(route('Admin.showUsers'));
+        return redirect(route('Admin.showUsers'))->withSuccess(get_message('succ-update'));
     }
 
     public function deleteUser(Request $request){
