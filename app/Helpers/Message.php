@@ -10,6 +10,9 @@ function get_message($short){
                 case 'succ-update': return "Successfully updated!";
 
 		case 'err-login': return "Wrong username or password!";
+		case 'err-invite-time': return "Invite expired!";
+		case 'err-forbidden-username': return "Username not appropriate!";
+		case 'err-domain-registerable': return "Selected domain is not registerable!";
 	}
 }
 

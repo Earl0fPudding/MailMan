@@ -28,7 +28,7 @@
                                 @csrf
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <input type="text" class="validate" name="username" id="u_id" required autofocus>
+                                        <input type="text" value="{{ old('username') }}" class="validate @error('username') invalid @enderror" name="username" id="u_id" required autofocus>
                                         <label for="u_id">Username</label>
                                     </div>
                                 </div>

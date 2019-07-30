@@ -69,26 +69,26 @@
         @csrf
       <div class="row">
           <div class="input-field col m6 s12">
-              <input name="username_signup" value="{{ old('username_signup') }}" id="u_id" type="text" class="@error('username') invalid @enderror validate" required>
-              <label for="u_id">Username</label>
+              <input name="username_signup" value="{{ old('username_signup') }}" id="u_id_s" type="text" class="@error('username') invalid @enderror validate" required>
+              <label for="u_id_s">Username</label>
           </div>
           <div class="col m1 valign-wrapper s2">
               <h5>@</h5>
           </div>
           <div class="input-field col m5 s10">
-              <select id="d_id" name="domain_id_signup">
+              <select id="d_id_s" name="domain_id_signup">
                   @if(sizeof($registerable_domains)==0) <option value="" disabled selected>No domains available</option> @endif
                   @foreach($registerable_domains as $domain)
 		  <option value="{{ $domain->id }}" @if(old('domain_id_signup')==$domain->id) selected @endif >{{ $domain->name }}</option>
 		  @endforeach
               </select>
-              <label for="d_id">Domain</label>
+              <label for="d_id_s">Domain</label>
           </div>
       </div>
       <div class="row">
           <div class="input-field col m12">
-              <input name="password_signup" id="p_id" type="password" class="@error('password_signup') invalid @enderror validate" required>
-              <label for="p_id">Password</label>
+              <input name="password_signup" id="p_id_s" type="password" class="@error('password_signup') invalid @enderror validate" required>
+              <label for="p_id_s">Password</label>
           </div>
       </div>
       <div class="row">

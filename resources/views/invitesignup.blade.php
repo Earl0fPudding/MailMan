@@ -20,7 +20,7 @@
 	        @csrf
       		    <div class="row">
           		<div class="input-field col m6">
-              		    <input name="username" id="u_id" type="text" class="validate" @if(session('name_preset')!==null) value="{{ session('name_preset') }}" disabled @endif required>
+              		    <input name="username" id="u_id" type="text" class="validate @error('username') invalid @enderror" @if(session('name_preset')!==null) value="{{ session('name_preset') }}" disabled @else value="{{ old('username') }}" @endif required>
               		    <label for="u_id">Username</label>
           		</div>
           		<div class="col m6">
@@ -29,13 +29,13 @@
 		    </div>
 	            <div class="row">
         	         <div class="input-field col m12">
-              		     <input name="password" id="p_id" type="password" class="validate" required>
+              		     <input name="password" id="p_id" type="password" class="validate @error('password') invalid @enderror" required>
               		     <label for="p_id">Password</label>
           		 </div>
       		    </div>
       		    <div class="row">
           	        <div class="input-field col m12">
-              		    <input name="password_confirm" id="pc_id" type="password" class="validate" required>
+              		    <input name="password_confirm" id="pc_id" type="password" class="validate @error('password_confirm') invalid @enderror" required>
               		    <label for="pc_id">Confirm password</label>
           		</div>
       		    </div>

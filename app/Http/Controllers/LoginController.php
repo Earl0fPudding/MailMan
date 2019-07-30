@@ -41,7 +41,7 @@ class LoginController extends Controller
 
     public function processInvite(Request $request){
 	$invite = Invite::where('token', $request->token)->with('domain')->first();
-	if($invite->termination_date<date("Y-m-d H:i:s")) { return redirect(route('Login.showLogin')); }
+	if($invite->termination_date<date("Y-m-d H:i:s")) { return redirect(route('Login.showLogin'))->withErrors(get_message('err-invite-time')); }
 	session()->put('name_preset', $invite->name_preset);
 	session()->put('domain_id', $invite->domain_id);
 	session()->put('domain_name', $invite->domain->name);
@@ -51,12 +51,21 @@ class LoginController extends Controller
     }
 
     public function invitesignup(Request $request){
-	if($request->password!=$request->password_confirm) { return redirect(route('Login.logout')); }
+	$validator = Validator::make($request->all(), [
+            'username' => 'max:50',
+            'password' => 'required|same:password_confirm',
+            'password_confirm' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 	$user = new User();
 	if(session('name_preset')!==null){
 	    $user->username = session('name_preset');
 	} else {
-	    if(ForbiddenUsername::where('username', 'like', '%'.$request->username.'%')->count() > 0) { return redirect(route('Login.logout')); }
+	    if(ForbiddenUsername::where('username', 'like', '%'.$request->username.'%')->count() > 0) {
+		return redirect()->back()->withErrors(get_message('err-forbidden-username'))->withInput();
+	    }
 	    $user->username = $request->username;
 	}
 	$user->password = sha512_make($request->password);
@@ -78,8 +87,12 @@ class LoginController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-	if(ForbiddenUsername::where('username', 'like', '%'.$request->username_signup.'%')->count() > 0) { return redirect()->back(); }
-	if(!Domain::findOrFail($request->domain_id_signup)->registerable) { return redirect()->back(); }
+	if(ForbiddenUsername::where('username', 'like', '%'.$request->username_signup.'%')->count() > 0) {
+	    return redirect()->back()->withErrors(get_message('err-forbidden-username'))->withInput();
+	}
+	if(!Domain::findOrFail($request->domain_id_signup)->registerable) {
+	    return redirect()->back()->withErrors(get_message('err-domain-registerable'))->withInput();
+	}
 
 	$user = new User();
         $user->username = $request->username_signup;
@@ -92,9 +105,16 @@ class LoginController extends Controller
     }
 
     public function adminLogin(Request $request){
+	$validator = Validator::make($request->all(), [
+            'username' => 'required|max:50',
+            'password' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 	if (Auth::guard('admin')->attempt($request->only('username', 'password'))) {
 		return redirect(route('Admin.showDashboard'))->withSuccess(get_message('succ-login'));
-	} else { return redirect(route('Login.showAdminLogin')); }
+	} else { return redirect(route('Login.showAdminLogin'))->withErrors(get_message('err-login'))->withInput(); }
     }
 
     public function login(Request $request) {
