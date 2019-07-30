@@ -23,7 +23,7 @@ class Handler extends ExceptionHandler
      */
     protected $dontFlash = [
         'password',
-        'password_confirmation',
+        'password_confirm*',
     ];
 
     /**
@@ -46,6 +46,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+//	return redirect()->back()->withErrors('err-unknown')->withInput();
+	return parent::render($request, $exception);
     }
 }

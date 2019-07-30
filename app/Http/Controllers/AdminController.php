@@ -12,6 +12,7 @@ use Hash;
 use App\Alias;
 use App\Invite;
 use App\ForbiddenUsername;
+use Validator;
 
 class AdminController extends Controller
 {
@@ -59,39 +60,62 @@ class AdminController extends Controller
     }
 
     public function changePassword(Request $request){
+	$validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'password_cp' => 'required|same:password_confirm_cp',
+            'password_confirm_cp' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 	$loggedin_user = Auth::guard('admin')->user();
-	if($request->password == $request->password_confirm){
-	    if(Hash::check($request->old_password, $loggedin_user->password)){
-		$loggedin_user->password = Hash::make($request->password);
-		$loggedin_user->save();
-	    }
+	if(Hash::check($request->old_password, $loggedin_user->password)){
+	    $loggedin_user->password = Hash::make($request->password);
+	    $loggedin_user->save();
+	} else {
+	    return redirect()->back()->withErrors(get_message('err-pw-change-old'))->withInput();
 	}
-	return redirect()->back();
+	return redirect()->back()->withSuccess(get_message('succ-pw-change'));
     }
 
 // --- DOMAIN ---
 
     public function addDomain(Request $request){
+	$validator = Validator::make($request->all(), [
+            'name_add' => 'required|max:70|unique:domains,name',
+	    'registerable_add' => 'integer'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
 	$domain = new Domain();
-	$domain->name = $request->name;
-	$domain->registerable = isset($request->registerable);
+	$domain->name = $request->name_add;
+	$domain->registerable = isset($request->registerable_add);
 	$domain->save();
 
-	return redirect(route('Admin.showDomains'));
+	return redirect(route('Admin.showDomains'))->withSuccess(get_message('succ-create'));
     }
 
     public function updateDomain(Request $request){
+	$validator = Validator::make($request->all(), [
+            'registerable_update' => 'integer',
+	    'id' => 'integer'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 	$domain = Domain::findOrFail($request->id);
-	$domain->registerable = $request->registerable;
+	$domain->registerable = $request->registerable_update;
 	$domain->save();
 
-	return redirect(route('Admin.showDomains'));
+	return redirect(route('Admin.showDomains'))->withSuccess(get_message('succ-update'));
     }
 
     public function deleteDomain(Request $request){
 	Domain::destroy($request->id);
 
-	return redirect(route('Admin.showDomains'));
+	return redirect(route('Admin.showDomains'))->withSuccess(get_message('succ-delete'));
     }
 
 // --- USER ---

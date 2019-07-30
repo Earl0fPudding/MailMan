@@ -35,7 +35,7 @@
 					<td>
 					     <div class="input-field col m2">
 					         <input type="hidden" name="_token" form="edit_form_{{ $domain->id }}" value="{{ csrf_token() }}">
-    						 <select name="registerable" form="edit_form_{{ $domain->id }}">
+    						 <select name="registerable_update" form="edit_form_{{ $domain->id }}">
       						     <option value="0" @if($domain->registerable==0) selected @endif>No</option>
       						     <option value="1" @if($domain->registerable==1) selected @endif>Yes</option>
     						 </select>
@@ -54,7 +54,6 @@
         </div>
     </main>
 @include('footer')
-
   <div id="create-modal" class="modal">
     <form method="post" action="{{route('Admin.addDomain')}}">
     <div class="modal-content">
@@ -63,7 +62,7 @@
 	  <div class="container">
 	    <div class="row">
 	      <div class="input-field col m12">
-		<input name="name" id="n_id" type="text" placeholder="example.com" class="validate" required>
+		<input name="name_add" data-length="70" id="n_id" value="{{ old('name_add') }}" type="text" placeholder="example.com" class="validate input-text @error('name_add') invalid @enderror" required>
 		<label for="n_id">Domain name</label>
 	      </div>
 	    </div>
@@ -71,7 +70,7 @@
 	      <div class="input-field col m12">
 		<p>
                   <label for="r_id">
-        	    <input type="checkbox" name="registerable" id="r_id" class="validate" value="1">
+        	    <input type="checkbox" name="registerable_add" id="r_id" class="validate" value="1" @if(old('registerable_add')) checked @endif>
         	    <span>Registerable</span>
                   </label>
                 </p>
@@ -80,7 +79,7 @@
 	  </div>
     </div>
     <div class="modal-footer" style="text-align:center;">
-      <button type="submit" href="#!" class="modal-close waves-effect waves-light btn blue darken-2">Add</button>
+      <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Add</button>
     </div>
     </form>
   </div>
@@ -89,6 +88,10 @@
 $(document).ready(function(){
     $('.modal').modal();
     $('select').formSelect();
+    $('input.input-text').characterCounter();
+    @if(old('name_add'))
+    $('#create-modal').modal('open');
+    @endif
   });
 
 </script>
