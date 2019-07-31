@@ -257,7 +257,7 @@ class AdminController extends Controller
     public function addInvite(Request $request){
 	$validator = Validator::make($request->all(), [
             'domain_id_add' => 'required|integer',
-	    'name_preset_add' => 'max:50|unique:users,username|unique:invites,name_preset',
+	    'name_preset_add' => 'max:50',
 	    'termination_date_add' => 'required',
 	    'termination_time_add' => 'required'
         ]);
@@ -265,6 +265,10 @@ class AdminController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+	if(isset($request->name_preset_add) && (User::with(['username' => $request->name_preset_add, 'domain_id' => $request->domain_id_add])->count()>0 ||
+	   Invite::with(['name_preset' => $request->name_preset_add, 'domain_id' => $request->domain_id_add])->count()>0)) {
+	    return redirect()->back()->withErrors(get_message('err-username-exists'))->withInput();
+	}
 	if($request->termination_date_add.' '.$request->termination_time_add<date("Y-m-d H:i:s")) {
 	    return redirect()->back()->withErrors(get_message('err-invite-date'))->withInput();
 	}
