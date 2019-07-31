@@ -52,26 +52,26 @@
           <div class="container">
             <div class="row">
               <div class="input-field col m12">
-                <input name="username" id="u_id" type="text" class="validate" required>
+                <input name="username_add" value="{{ old('username_add') }}" id="u_id" type="text" class="input-text validate @error('username_add') invalid @enderror" data-length="50" required>
                 <label for="u_id">Username</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col m12">
-                <input name="password" id="p_id" type="password" class="validate" required>
+                <input name="password_add" id="p_id" type="password" class="validate @error('password_add') invalid @enderror" required>
                 <label for="p_id">Password</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col m12">
-                <input name="password_confirm" id="pc_id" type="password" class="validate" required>
+                <input name="password_confirm_add" id="pc_id" type="password" class="validate @error('password_confirm_add') invalid @enderror" required>
                 <label for="pc_id">Confirm password</label>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer" style="text-align:center;">
-        <button type="submit" href="#!" class="modal-close waves-effect waves-light btn blue darken-2">Add</button>
+        <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Add</button>
       </div>
     </form>
   </div>
@@ -79,26 +79,27 @@
 @foreach($admins as $admin)
   <div id="edit-modal-{{ $admin->id }}" class="modal">
     <form method="post" action="{{route('Admin.updateAdmin', ['id' => $admin->id] )}}">
+    <input type="hidden" name="admin_id" value="{{$admin->id}}">
       <div class="modal-content">
         <h4>Edit {{ $admin->username }}</h4>
         @csrf
         <div class="contrainer">
           <div class="row">
             <div class="input-field col m12">
-              <input name="password" placeholder="New password" id="p_id" type="password" class="validate" required>
-              <label for="p_id">New password</label>
+              <input name="password_update" placeholder="New password" id="p_id_{{$admin->id}}" type="password" class="validate @error('password_update') invalid @enderror" required>
+              <label for="p_id_{{$admin->id}}">New password</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col m12">
-              <input name="password_confirm" id="pc_id" placeholder="Confirm new password" type="password" class="validate" required>
-              <label for="pc_id">Confirm new password</label>
+              <input name="password_confirm_update" id="pc_id_{{$admin->id}}" placeholder="Confirm new password" type="password" class="validate @error('password_confirm_update') invalid @enderror" required>
+              <label for="pc_id_{{$admin->id}}">Confirm new password</label>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer" style="text-align:center;">
-        <button type="submit" href="#!" class="modal-close waves-effect waves-light btn blue darken-2">Edit</button>
+        <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Edit</button>
       </div>
     </form>
   </div>
@@ -107,7 +108,14 @@
 <script>
 $(document).ready(function(){
     $('.modal').modal();
+    @if(old('username_add'))
+    $('#create-modal').modal('open');
+    @endif
+    @if(old('password_update'))
+    $('#edit-modal-{{old("admin_id")}}').modal('open');
+    @endif
     $('select').formSelect();
+    $('input.input-text').characterCounter();
   });
 
 </script>

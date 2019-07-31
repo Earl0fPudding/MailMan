@@ -161,34 +161,49 @@ class AdminController extends Controller
     public function deleteUser(Request $request){
         User::destroy($request->id);
 
-        return redirect(route('Admin.showUsers'));
+        return redirect(route('Admin.showUsers'))->withSuccess(get_message('succ-delete'));
     }
 
 // --- ADMIN ---
 
     public function addAdmin(Request $request){
-	if($request->password != $request->password_confirm) { return redirect(route('Admin.showAdmins')); }
+	$validator = Validator::make($request->all(), [
+            'username_add' => 'required|max:50|unique:admins,username',
+            'password_add' => 'required|same:password_confirm_add',
+            'password_confirm_add' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $admin = new Admin();
-        $admin->username = $request->username;
-        $admin->password = Hash::make($request->password);
+        $admin->username = $request->username_add;
+        $admin->password = Hash::make($request->password_add);
         $admin->save();
 
-        return redirect(route('Admin.showAdmins'));
+        return redirect(route('Admin.showAdmins'))->withSuccess(get_message('succ-create'));
     }
 
     public function updateAdmin(Request $request){
-        if($request->password != $request->password_confirm) { return redirect(route('Admin.showAdmins')); }
+	$validator = Validator::make($request->all(), [
+            'password_update' => 'required|same:password_confirm_update',
+            'password_confirm_update' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
 	$admin = Admin::findOrFail($request->id);
-        $admin->password = Hash::make($request->password);
+        $admin->password = Hash::make($request->password_update);
         $admin->save();
 
-        return redirect(route('Admin.showAdmins'));
+        return redirect(route('Admin.showAdmins'))->withSuccess(get_message('succ-update'));
     }
 
     public function deleteAdmin(Request $request){
         Admin::destroy($request->id);
 
-        return redirect(route('Admin.showAdmins'));
+        return redirect(route('Admin.showAdmins'))->withSuccess(get_message('succ-delete'));
     }
 
 // --- ALIAS ---
