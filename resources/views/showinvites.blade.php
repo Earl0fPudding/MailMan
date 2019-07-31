@@ -57,10 +57,10 @@
 	  <div class="container">
 	    <div class="row">
 	      <div class="input-field col m12">
-		<select id="d_id" name="domain_id">
-                  <option value="" disabled selected>Choose a domain</option>
+		<select id="d_id" name="domain_id_add">
+                  @if(sizeof($domains)==0) <option value="" disabled selected>No domains available</option> @endif
                   @foreach($domains as $domain)
-                    <option value="{{ $domain->id }}">{{ $domain->name }}</option>
+                    <option value="{{ $domain->id }}" @if(old('domain_id_add')==$domain->id) selected @endif >{{ $domain->name }}</option>
                   @endforeach
                 </select>
                 <label for="d_id">Domain</label>
@@ -68,24 +68,24 @@
 	    </div>
 	    <div class="row">
 	      <div class="input-field col m12">
-		<input name="name_preset" id="p_id" type="text" class="validate">
+		<input name="name_preset_add" value="{{ old('name_preset_add') }}" id="p_id" type="text" class="validate input-text @error('name_preset_add') invalid @enderror" data-length="50">
                 <label for="p_id">Name preset (optional)</label>
 	      </div>
 	    </div>
 	    <div class="row">
 	      <div class="input-field col m6">
-		<input type="text" value="{{ date('Y-m-d') }}" class="datepicker" name="termination_date" id="td_id" required>
+		<input type="text" @if(old('termination_date_add')) value="{{old('termination_date_add')}}" @else value="{{ date('Y-m-d') }}" @endif class="datepicker @error('termination_date_add') invalid @enderror" name="termination_date_add" id="td_id" required>
 		<label for="td_id">Date of termination</label>
 	      </div>
 	      <div class="input-field col m6">
-                <input type="text" value="" class="timepicker" name="termiantion_time" id="tt_id" required>
+                <input type="text" value="{{old('termination_time_add')}}" class="timepicker @error('termination_time_add') invalid @enderror" name="termination_time_add" id="tt_id" required>
                 <label for="tt_id">Time of termination</label>
 	      </div>
 	    </div>
 	  </div>
     </div>
     <div class="modal-footer" style="text-align:center;">
-      <button type="submit" href="#!" class="modal-close waves-effect waves-light btn blue darken-2">Add</button>
+      <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Add</button>
     </div>
     </form>
   </div>
@@ -93,6 +93,9 @@
 <script>
 $(document).ready(function(){
     $('.modal').modal();
+    @if(old('domain_id_add'))
+    $('#create-modal').modal('open');
+    @endif
     $('select').formSelect();
     $('.datepicker').datepicker({
                 monthsFull: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -111,6 +114,7 @@ $(document).ready(function(){
     $('.timepicker').timepicker({
 		twelveHour: false
     });
+    $('input.input-text').characterCounter();
   });
 
 </script>

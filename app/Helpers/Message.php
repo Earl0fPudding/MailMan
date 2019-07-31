@@ -21,6 +21,7 @@ function get_message($short){
 		case 'err-invite-invalid': return "Invite Link invalid!";
 		case 'err-last-admin': return "Can't delete last admin user!";
 		case 'err-alias-username': return "Source email already exists!";
+		case 'err-invite-date': return "The date and time has to be in the future!";
 	}
 }
 
