@@ -201,6 +201,7 @@ class AdminController extends Controller
     }
 
     public function deleteAdmin(Request $request){
+	if(Admin::count() == 1) { return redirect()->back()->withErrors(get_message('err-last-admin')); }
         Admin::destroy($request->id);
 
         return redirect(route('Admin.showAdmins'))->withSuccess(get_message('succ-delete'));

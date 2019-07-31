@@ -19,6 +19,7 @@ function get_message($short){
 		case 'err-domainname-exists': return "Domain name already exists!";
 		case 'err-invite-expired': return "Invite link expired!";
 		case 'err-invite-invalid': return "Invite Link invalid!";
+		case 'err-last-admin': return "Can't delete last admin user!";
 	}
 }
 
