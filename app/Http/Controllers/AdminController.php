@@ -219,6 +219,9 @@ class AdminController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+	if(User::where([ 'username' => $request->username_add, 'domain_id' => $request->domain_id_add ])->count() == 1) {
+	    return redirect()->back()->withErrors(get_message('err-alias-username'))->withInput();
+	}
         $alias = new Alias();
         $alias->source_username = $request->username_add;
         $alias->source_domain_id = $request->domain_id_add;

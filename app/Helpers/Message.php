@@ -20,6 +20,7 @@ function get_message($short){
 		case 'err-invite-expired': return "Invite link expired!";
 		case 'err-invite-invalid': return "Invite Link invalid!";
 		case 'err-last-admin': return "Can't delete last admin user!";
+		case 'err-alias-username': return "Source email already exists!";
 	}
 }
 
