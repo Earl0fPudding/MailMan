@@ -304,16 +304,23 @@ class AdminController extends Controller
 // --- FORBIDDEN USERNAMES ---
 
     public function addForbiddenUsername(Request $request){
+	$validator = Validator::make($request->all(), [
+            'username_add' => 'required|max:50|unique:forbidden_usernames,username',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $forbiddenusername = new ForbiddenUsername();
-	$forbiddenusername->username = $request->username;
+	$forbiddenusername->username = $request->username_add;
         $forbiddenusername->save();
 
-        return redirect(route('Admin.showForbiddenUsernames'));
+        return redirect(route('Admin.showForbiddenUsernames'))->withSuccess(get_message('succ-create'));
     }
 
     public function deleteForbiddenUsername(Request $request){
         ForbiddenUsername::destroy($request->id);
 
-        return redirect(route('Admin.showForbiddenUsernames'));
+        return redirect(route('Admin.showForbiddenUsernames'))->withSuccess(get_message('succ-delete'));
     }
 }

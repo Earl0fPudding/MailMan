@@ -51,14 +51,14 @@
 	  <div class="container">
 	    <div class="row">
 	      <div class="input-field col m12">
-		<input name="username" id="u_id" type="text" class="validate">
+		<input name="username_add" value="{{old('username_add')}}" data-length="50" id="u_id" type="text" class="validate input-text @error('username_add') invalid @enderror">
                 <label for="u_id">Username</label>
 	      </div>
 	    </div>
 	  </div>
     </div>
     <div class="modal-footer" style="text-align:center;">
-      <button type="submit" href="#!" class="modal-close waves-effect waves-light btn blue darken-2">Add</button>
+      <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Add</button>
     </div>
     </form>
   </div>
@@ -66,6 +66,10 @@
 <script>
 $(document).ready(function(){
     $('.modal').modal();
+    @if(old('username_add'))
+    $('#create-modal').modal('open');
+    @endif
+    $('input.input-text').characterCounter();
   });
 
 </script>
