@@ -94,7 +94,7 @@
 @foreach($users as $user)
   <div id="edit-modal-{{ $user->id }}" class="modal">
     <form method="post" action="{{route('Admin.updateUser', ['id' => $user->id] )}}">
-	<input type="text" name="user_id" value="{{$user->id}}" hidden>
+	<input type="hidden" name="user_id" value="{{$user->id}}">
       <div class="modal-content">
         <h4>Edit {{ $user->username.'@'.$user->domain->name }}</h4>
         @csrf
