@@ -210,27 +210,43 @@ class AdminController extends Controller
 // --- ALIAS ---
 
     public function addAlias(Request $request){
+	$validator = Validator::make($request->all(), [
+            'username_add' => 'required|max:50',
+            'domain_id_add' => 'required|integer',
+            'user_id_add' => 'required|integer',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $alias = new Alias();
-        $alias->source_username = $request->username;
-        $alias->source_domain_id = $request->domain_id;
-	$alias->destination_user_id = $request->user_id;
+        $alias->source_username = $request->username_add;
+        $alias->source_domain_id = $request->domain_id_add;
+	$alias->destination_user_id = $request->user_id_add;
         $alias->save();
 
-        return redirect(route('Admin.showAliases'));
+        return redirect(route('Admin.showAliases'))->withSuccess(get_message('succ-create'));
     }
 
     public function updateAlias(Request $request){
+	$validator = Validator::make($request->all(), [
+            'user_id_update' => 'required|integer',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $alias = Alias::findOrFail($request->id);
-        $alias->destination_user_id = $request->user_id;
+        $alias->destination_user_id = $request->user_id_update;
         $alias->save();
 
-        return redirect(route('Admin.showAliases'));
+        return redirect(route('Admin.showAliases'))->withSuccess(get_message('succ-update'));
     }
 
     public function deleteAlias(Request $request){
         Alias::destroy($request->id);
 
-        return redirect(route('Admin.showAliases'));
+        return redirect(route('Admin.showAliases'))->withSuccess(get_message('succ-delete'));
     }
 
 // --- INVITE ---
