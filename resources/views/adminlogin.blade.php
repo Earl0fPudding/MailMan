@@ -28,17 +28,22 @@
                                 @csrf
                                 <div class="row">
                                     <div class="input-field col s12">
+					<i class="material-icons prefix">person</i>
                                         <input type="text" value="{{ old('username') }}" class="validate @error('username') invalid @enderror" name="username" id="u_id" required autofocus>
                                         <label for="u_id">Username</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s12">
+					<i class="material-icons prefix">fingerprint</i>
                                         <input name="password" id="p_id" type="password" class="validate" required>
                                         <label for="p_id">Password</label>
                                     </div>
                                 </div>
-                                <button class="btn waves-effect waves-light blue darken-2" type="submit" name="action" id="b_submit">Log in</button>
+                                <button class="btn waves-effect waves-light blue darken-2" type="submit" name="action" id="b_submit">
+				    Log in
+				    <i class="material-icons right">vpn_key</i>
+				</button>
                             </form>
                         </div>
                     </div>
