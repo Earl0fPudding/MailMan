@@ -7,5 +7,6 @@
 	<script src="https://unpkg.com/ionicons@4.2.2/dist/ionicons.js"></script>
         <script src="{{asset('js/materialize.min.js')}}"></script>
         <link href="{{asset('css/materialize.min.css')}}" rel="stylesheet" type="text/css">
+	<link href="{{asset('icons/icons.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('css/mailman.css')}}" rel="stylesheet" type="text/css">
         <meta name="csrf-token" content="{{ csrf_token() }}">
