@@ -265,8 +265,8 @@ class AdminController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-	if(isset($request->name_preset_add) && (User::with(['username' => $request->name_preset_add, 'domain_id' => $request->domain_id_add])->count()>0 ||
-	   Invite::with(['name_preset' => $request->name_preset_add, 'domain_id' => $request->domain_id_add])->count()>0)) {
+	if(isset($request->name_preset_add) && (User::where(['username' => $request->name_preset_add, 'domain_id' => $request->domain_id_add])->count()>0 ||
+	   Invite::where(['name_preset' => $request->name_preset_add, 'domain_id' => $request->domain_id_add])->count()>0)) {
 	    return redirect()->back()->withErrors(get_message('err-username-exists'))->withInput();
 	}
 	if($request->termination_date_add.' '.$request->termination_time_add<date("Y-m-d H:i:s")) {

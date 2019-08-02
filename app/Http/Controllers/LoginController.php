@@ -41,7 +41,8 @@ class LoginController extends Controller
     }
 
     public function processInvite(Request $request){
-	if(Invite::where('token', $request->token)->with('domain')->count() == 0) { return redirect(route('Login.showLogin'))->withErrors(get_message('err-invite-invalid')); }
+	if(Invite::where('token', $request->token)->count() == 0) { return redirect(route('Login.showLogin'))->withErrors(get_message('err-invite-invalid')); }
+	$invite = Invite::where('token', $request->token)->with('domain')->first();
 	if($invite->termination_date<date("Y-m-d H:i:s")) { return redirect(route('Login.showLogin'))->withErrors(get_message('err-invite-expired')); }
 	session()->put('name_preset', $invite->name_preset);
 	session()->put('domain_id', $invite->domain_id);
