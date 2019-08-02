@@ -9,6 +9,18 @@
     flex: 1 0 auto;
   }
 
+ .dropdown-content {
+    background-color: #ffffff !important;
+ }
+
+ .subnav-item {
+    margin-left: 40px;
+ }
+
+ .dropdown-content li > a, .dropdown-content li > span {
+    color: #42a5f5 !important;
+ }
+
 /* label focus color */
  .input-field input:focus + label {
     color: #42a5f5 !important;
