@@ -11,20 +11,20 @@
         <div class="container">
 	    <div class="row">
 		<div class="col m10">
-                    <h2>Aliases</h2>
+                    <h3><i class="material-icons">compare_arrows</i> Aliases</h3>
 		</div>
 		<div class="col m2">
-			<a class="waves-effect waves-light modal-trigger add-button" href="#create-modal"><ion-icon size="large" name="add-circle"></ion-icon></a>
-		</div>
+                    <a class="btn-floating btn-large waves-effect waves-light modal-trigger blue darken-2 add-button" href="#create-modal"><i class="material-icons">add</i></a>
+                </div>
 	    </div>
             <div class="row">
                 <div class="col m12">
                     <table class="striped">
 			<thead>
 			    	<tr>
-				    <th>Source address</th>
-				    <th>Destination address</th>
-				    <th>Options</th>
+				    <th><i class="material-icons tiny">file_upload</i> Source address</th>
+				    <th><i class="material-icons tiny">file_download</i> Destination address</th>
+				    <th><i class="material-icons tiny">build</i> Options</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -43,8 +43,8 @@
   					     </div>
 					</td>
 					<td>
-					    <button type="submit" form="edit_form_{{ $alias->id }}" class="btn-flat">Save</button>
-					    <a href="{{route('Admin.deleteAlias', ['id' => $alias->id])}}"><button type="button" class="btn-flat">Delete</button></a>
+					    <button type="submit" form="edit_form_{{ $alias->id }}" class="btn-flat"><i class="material-icons">save</i></button>
+					    <a href="{{route('Admin.deleteAlias', ['id' => $alias->id])}}"><button type="button" class="btn-flat"><i class="material-icons">delete</i></button></a>
 					</td>
 				</tr>
 			    @endforeach
@@ -64,13 +64,12 @@
 	  <div class="container">
 	    <div class="row">
               <div class="input-field col m6 s12">
+		<i class="material-icons prefix">person</i>
                 <input name="username_add" value="{{ old('username_add') }}" id="u_id" type="text" class="validate input-text @error('username_add') invalid @enderror" data-length="50" required>
                 <label for="u_id">Username</label>
               </div>
-              <div class="col m1 valign-wrapper s2">
-                <h5>@</h5>
-              </div>
-              <div class="input-field col m5 s10">
+              <div class="input-field col m6 s12">
+		<i class="material-icons prefix">@</i>
                 <select id="d_id" name="domain_id_add">
                   @if(sizeof($domains)==0) <option value="" disabled selected>No domains available</option> @endif
                 @foreach($domains as $domain)
@@ -82,6 +81,7 @@
             </div>
 	    <div class="row">
 	      <div class="input-field col m12">
+		<i class="material-icons prefix">email</i>
 		<select name="user_id_add" id="user_id_add">
 		 @if(sizeof($users)==0) <option value="" selected disabled>No mail address available</option> @endif
                 @foreach($users as $user)
@@ -94,7 +94,7 @@
 	  </div>
     </div>
     <div class="modal-footer" style="text-align:center;">
-      <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Add</button>
+      <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2"><i class="material-icons right">save</i>Add</button>
     </div>
     </form>
   </div>
@@ -110,5 +110,6 @@ $(document).ready(function(){
   });
 
 </script>
+<script src="{{asset('js/mailman.js')}}"></script>
     </body>
 </html>

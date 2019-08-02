@@ -22,9 +22,9 @@
                     <table class="striped">
 			<thead>
 			    	<tr>
-				    <th>Username</th>
-				    <th>Domain</th>
-				    <th>Options</th>
+				    <th><i class="material-icons tiny">person</i> Username</th>
+				    <th><i class="material-icons tiny">language</i> Domain</th>
+				    <th><i class="material-icons tiny">build</i> Options</th>
 				</tr>
 			</thead>
 			<tbody>
