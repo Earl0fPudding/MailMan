@@ -11,10 +11,10 @@
         <div class="container">
 	    <div class="row">
 		<div class="col m10">
-                    <h2>Mail users</h2>
+                    <h3><i class="material-icons">person</i> Mail users</h3>
 		</div>
 		<div class="col m2">
-		    <a class="waves-effect waves-light modal-trigger add-button" href="#create-modal"><ion-icon size="large" name="add-circle"></ion-icon></a>
+		    <a class="btn-floating btn-large waves-effect waves-light modal-trigger blue darken-2 add-button" href="#create-modal"><i class="material-icons">add</i></a>
 		</div>
 	    </div>
             <div class="row">
@@ -33,8 +33,8 @@
 					<td>{{ $user->username }}</td>
 					<td>{{ $user->domain->name }}</td>
 					<td>
-					    <a class="waves-effect waves-light btn-flat modal-trigger" href="#edit-modal-{{ $user->id }}">Edit</a>
-					    <a href="{{route('Admin.deleteUser', ['id' => $user->id])}}"><button type="button" class="btn-flat">Delete</button></a>
+					    <a class="waves-effect waves-light btn-flat modal-trigger" href="#edit-modal-{{ $user->id }}"><i class="material-icons">edit</i></a>
+					    <a href="{{route('Admin.deleteUser', ['id' => $user->id])}}"><button type="button" class="btn-flat"><i class="material-icons">delete</i></button></a>
 					</td>
 				</tr>
 			    @endforeach
@@ -54,13 +54,12 @@
           <div class="container">
             <div class="row">
               <div class="input-field col m6 s12">
+	      <i class="material-icons prefix">person</i>
               <input name="username" id="u_id" type="text" data-length="50" value="{{ old('username') }}" class="validate input-text @error('username') invalid @enderror" required>
               <label for="u_id">Username</label>
           </div>
-          <div class="col m1 valign-wrapper s2">
-              <h5>@</h5>
-          </div>
-          <div class="input-field col m5 s10">
+          <div class="input-field col m6 s12">
+	      <i class="material-icons prefix">@</i>
               <select id="d_id" name="domain_id">
                   @if(sizeof($domains)==0) <option value="" disabled selected>No domains available</option> @endif
 		  @foreach($domains as $domain)
@@ -73,12 +72,14 @@
             </div>
             <div class="row">
           <div class="input-field col m12">
+	      <i class="material-icons prefix">fingerprint</i>
               <input name="password" id="p_id" type="password" class="validate @error('password') invalid @enderror" required>
               <label for="p_id">Password</label>
           </div>
       </div>
       <div class="row">
           <div class="input-field col m12">
+	      <i class="material-icons prefix">fingerprint</i>
               <input name="password_confirm" id="pc_id" type="password" class="validate @error('password_confirm') invalid @enderror" required>
               <label for="pc_id">Confirm password</label>
           </div>
@@ -86,7 +87,7 @@
           </div>
     </div>
     <div class="modal-footer" style="text-align:center;">
-      <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Add</button>
+      <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2"><i class="material-icons right">save</i>Add</button>
     </div>
     </form>
   </div>
@@ -101,12 +102,14 @@
         <div class="contrainer">
           <div class="row">
             <div class="input-field col m12">
+	      <i class="material-icons prefix">fingerprint</i>
               <input name="password_update" placeholder="New password" id="p_id_{{$user->id}}" type="password" class="validate @error('password_update') invalid @enderror" required>
               <label for="p_id_{{$user->id}}">New password</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col m12">
+	      <i class="material-icons prefix">fingerprint</i>
               <input name="password_confirm_update" id="pc_id_{{$user->id}}" placeholder="Confirm new password" type="password" class="validate @error('password_confirm_update') invalid @enderror" required>
               <label for="pc_id_{{$user->id}}">Confirm new password</label>
             </div>
@@ -114,7 +117,7 @@
         </div>
       </div>
       <div class="modal-footer" style="text-align:center;">
-        <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Edit</button>
+        <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2"><i class="material-icons right">save</i>Save</button>
       </div>
     </form>
   </div>
@@ -134,6 +137,6 @@ $(document).ready(function(){
   });
 
 </script>
-
+<script src="{{asset('js/mailman.js')}}"></script>
     </body>
 </html>

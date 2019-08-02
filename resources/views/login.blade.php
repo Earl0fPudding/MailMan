@@ -115,7 +115,7 @@
               {!! captcha_img() !!}
           </div>
           <div class="col m1 s1 offset-s2">
-              <a href="#!" id="refreshCaptcha"><button class="btn-floating"><i class="material-icons">autorenew</i></button></a>
+              <a href="#!" id="refreshCaptcha"><button class="btn-floating blue darken-2"><i class="material-icons">autorenew</i></button></a>
           </div>
       <div>
       <div class="row">
@@ -128,7 +128,7 @@
     </div></div>
     <div class="modal-footer" style="text-align:center;">
       <button type="submit" class="waves-effect waves-light blue darken-2 btn">
-	Sign up
+	Sign up now
 	<i class="material-icons right">send</i>
       </button>
     </div>

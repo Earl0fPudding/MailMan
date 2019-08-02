@@ -89,7 +89,7 @@
         </div>
       </div>
       <div class="modal-footer" style="text-align:center;">
-        <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Change password</button>
+        <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2"><i class="material-icons right">save</i>Apply</button>
       </div>
     </form>
   </div>
