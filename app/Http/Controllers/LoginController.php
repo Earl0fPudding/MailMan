@@ -48,6 +48,7 @@ class LoginController extends Controller
 	session()->put('domain_id', $invite->domain_id);
 	session()->put('domain_name', $invite->domain->name);
 	session()->put('invite_token', $invite->token);
+	session()->put('token', $invite->token);
 //	$invite->delete();
 
 	return view('invitesignup');
