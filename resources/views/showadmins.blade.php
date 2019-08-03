@@ -11,10 +11,10 @@
         <div class="container">
 	    <div class="row">
 		<div class="col m10">
-                    <h2>Admin users</h2>
+                    <h3><i class="material-icons">people</i> Admin users</h3>
 		</div>
 		<div class="col m2">
-		    <a class="waves-effect waves-light modal-trigger add-button" href="#create-modal"><ion-icon size="large" name="add-circle"></ion-icon></a>
+		    <a class="btn-floating btn-large waves-effect waves-light modal-trigger blue darken-2 add-button" href="#create-modal"><i class="material-icons">add</i></a>
 		</div>
 	    </div>
             <div class="row">
@@ -22,8 +22,8 @@
                     <table class="striped">
 			<thead>
 			    	<tr>
-				    <th>Username</th>
-				    <th>Options</th>
+				    <th><i class="material-icons tiny">person</i> Username</th>
+				    <th><i class="material-icons tiny">build</i> Options</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -31,8 +31,8 @@
 				<tr>
 					<td>{{ $admin->username }}</td>
 					<td>
-					    <a class="waves-effect waves-light btn-flat modal-trigger" href="#edit-modal-{{ $admin->id }}">Edit</a>
-					    <a href="{{route('Admin.deleteAdmin', ['id' => $admin->id])}}"><button type="button" class="btn-flat">Delete</button></a>
+					    <a class="waves-effect waves-light btn-flat modal-trigger" href="#edit-modal-{{ $admin->id }}"><i class="material-icons">edit</i></a>
+					    <a href="{{route('Admin.deleteAdmin', ['id' => $admin->id])}}"><button type="button" class="btn-flat"><i class="material-icons">delete</i></button></a>
 					</td>
 				</tr>
 			    @endforeach
@@ -52,18 +52,21 @@
           <div class="container">
             <div class="row">
               <div class="input-field col m12">
+		<i class="material-icons prefix">person</i>
                 <input name="username_add" value="{{ old('username_add') }}" id="u_id" type="text" class="input-text validate @error('username_add') invalid @enderror" data-length="50" required>
                 <label for="u_id">Username</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col m12">
+		<i class="material-icons prefix">fingerprint</i>
                 <input name="password_add" id="p_id" type="password" class="validate @error('password_add') invalid @enderror" required>
                 <label for="p_id">Password</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col m12">
+		<i class="material-icons prefix">fingerprint</i>
                 <input name="password_confirm_add" id="pc_id" type="password" class="validate @error('password_confirm_add') invalid @enderror" required>
                 <label for="pc_id">Confirm password</label>
             </div>
@@ -71,7 +74,7 @@
         </div>
       </div>
       <div class="modal-footer" style="text-align:center;">
-        <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Add</button>
+        <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Add<i class="material-icons right">save</i></button>
       </div>
     </form>
   </div>
@@ -86,12 +89,14 @@
         <div class="contrainer">
           <div class="row">
             <div class="input-field col m12">
+	      <i class="material-icons prefix">fingerprint</i>
               <input name="password_update" placeholder="New password" id="p_id_{{$admin->id}}" type="password" class="validate @error('password_update') invalid @enderror" required>
               <label for="p_id_{{$admin->id}}">New password</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col m12">
+	      <i class="material-icons prefix">fingerprint</i>
               <input name="password_confirm_update" id="pc_id_{{$admin->id}}" placeholder="Confirm new password" type="password" class="validate @error('password_confirm_update') invalid @enderror" required>
               <label for="pc_id_{{$admin->id}}">Confirm new password</label>
             </div>
@@ -99,7 +104,7 @@
         </div>
       </div>
       <div class="modal-footer" style="text-align:center;">
-        <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Edit</button>
+        <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2"><i class="material-icons right">save</i>Save</button>
       </div>
     </form>
   </div>
