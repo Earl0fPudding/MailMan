@@ -11,10 +11,10 @@
         <div class="container">
 	    <div class="row">
 		<div class="col m10">
-                    <h2>Domains</h2>
+                    <h3><i class="material-icons">language</i> Domains</h3>
 		</div>
 		<div class="col m2">
-			<a class="waves-effect waves-light modal-trigger add-button" href="#create-modal"><ion-icon size="large" name="add-circle"></ion-icon></a>
+		    <a class="btn-floating btn-large waves-effect waves-light modal-trigger blue darken-2 add-button" href="#create-modal"><i class="material-icons">add</i></a>
 		</div>
 	    </div>
             <div class="row">
@@ -22,9 +22,9 @@
                     <table class="striped">
 			<thead>
 			    	<tr>
-				    <th>Domain name</th>
-				    <th>Registerable</th>
-				    <th>Options</th>
+				    <th><i class="material-icons tiny">local_offer</i> Domain name</th>
+				    <th><i class="material-icons tiny">assignment</i> Registerable</th>
+				    <th><i class="material-icons tiny">build</i> Options</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -42,8 +42,8 @@
   					     </div>
 					</td>
 					<td>
-					    <button type="submit" form="edit_form_{{ $domain->id }}" class="btn-flat">Save</button>
-					    <a href="{{route('Admin.deleteDomain', ['id' => $domain->id])}}"><button type="button" class="btn-flat">Delete</button></a>
+					    <button type="submit" form="edit_form_{{ $domain->id }}" class="btn-flat"><i class="material-icons">save</i></button>
+					    <a href="{{route('Admin.deleteDomain', ['id' => $domain->id])}}"><button type="button" class="btn-flat"><i class="material-icons">delete</i></button></a>
 					</td>
 				</tr>
 			    @endforeach
@@ -62,6 +62,7 @@
 	  <div class="container">
 	    <div class="row">
 	      <div class="input-field col m12">
+		<i class="material-icons prefix">local_offer</i>
 		<input name="name_add" data-length="70" id="n_id" value="{{ old('name_add') }}" type="text" placeholder="example.com" class="validate input-text @error('name_add') invalid @enderror" required>
 		<label for="n_id">Domain name</label>
 	      </div>
@@ -71,7 +72,7 @@
 		<p>
                   <label for="r_id">
         	    <input type="checkbox" name="registerable_add" id="r_id" class="validate" value="1" @if(old('registerable_add')) checked @endif>
-        	    <span>Registerable</span>
+        	    <span class="black-text">Registerable <i class="material-icons tiny">assignment</i></span>
                   </label>
                 </p>
 	      </div>
@@ -79,7 +80,7 @@
 	  </div>
     </div>
     <div class="modal-footer" style="text-align:center;">
-      <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Add</button>
+      <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Add <i class="material-icons right">save</i></button>
     </div>
     </form>
   </div>
