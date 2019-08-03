@@ -15,7 +15,7 @@ class CreateInvitesTable extends Migration
     {
         Schema::create('invites', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('token', 50)->nullable($value = false);
+            $table->string('token', 50)->nullable($value = false)->unique();
             $table->string('name_preset', 50)->nullable($value = true);
             $table->dateTime('termination_date')->nullable($value = false);
             $table->unsignedBigInteger('domain_id')->nullable($value = false);
