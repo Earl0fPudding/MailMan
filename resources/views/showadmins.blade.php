@@ -10,7 +10,7 @@
     <main>
         <div class="container">
 	    <div class="row">
-		<div class="col m10">
+		<div class="col m10 s9">
                     <h3><i class="material-icons">people</i> Admin users</h3>
 		    <p>Administrator accounts to manage this instance of MailMan. Every admin has the same rights.</p>
 		</div>

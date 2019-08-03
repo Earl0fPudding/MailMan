@@ -10,7 +10,7 @@
     <main>
         <div class="container">
 	    <div class="row">
-		<div class="col m10">
+		<div class="col m10 s9">
                     <h3><i class="material-icons">language</i> Domains</h3>
 		    <p>The possible domains this instance of MailMan should manage.</p>
 		</div>

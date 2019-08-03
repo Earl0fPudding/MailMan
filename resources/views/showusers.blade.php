@@ -10,7 +10,7 @@
     <main>
         <div class="container">
 	    <div class="row">
-		<div class="col m10">
+		<div class="col m10 s9">
                     <h3><i class="material-icons">person</i> Mail users</h3>
 		    <p>Useres which have their own mailboxes and are able to log in to a mail client to send and receive mails.</p>
 		</div>

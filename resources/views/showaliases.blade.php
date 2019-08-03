@@ -10,7 +10,7 @@
     <main>
         <div class="container">
 	    <div class="row">
-		<div class="col m10">
+		<div class="col m10 s9">
                     <h3><i class="material-icons">compare_arrows</i> Aliases</h3>
 		    <p>Certain incoming mails can be forwaded to a specific existing mail account.</p>
 		</div>

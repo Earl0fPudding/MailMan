@@ -10,7 +10,7 @@
     <main>
         <div class="container">
 	    <div class="row">
-		<div class="col m10">
+		<div class="col m10 s9">
                     <h3><i class="material-icons">person_add</i> Invites</h3>
 		    <p>Create and share invitations with specific people so they can sign up to domains that are otherwise not registerable.</p>
 		</div>

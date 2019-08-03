@@ -10,7 +10,7 @@
     <main>
         <div class="container">
 	    <div class="row">
-		<div class="col m10">
+		<div class="col m10 s9">
                     <h3><i class="material-icons">pan_tool</i> Username blacklist</h3>
 		    <p>Usernames which are not possible to sign up a new account with. Admins are allowed to create mail users with those names tho.</p>
 		</div>
