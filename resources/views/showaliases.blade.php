@@ -44,7 +44,7 @@
 					</td>
 					<td>
 					    <button type="submit" form="edit_form_{{ $alias->id }}" class="btn-flat"><i class="material-icons">save</i></button>
-					    <a href="{{route('Admin.deleteAlias', ['id' => $alias->id])}}"><button type="button" class="btn-flat"><i class="material-icons">delete</i></button></a>
+					    <a href="{{route('Admin.deleteAlias', ['id' => $alias->id])}}"><button type="button" class="btn-flat"><i class="material-icons red-text darken-1">delete_forever</i></button></a>
 					</td>
 				</tr>
 			    @endforeach

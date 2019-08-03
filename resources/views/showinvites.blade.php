@@ -37,7 +37,7 @@
 					<td>{{ $invite->domain->name }}</td>
 					<td>{{ $invite->termination_date }} <!-- @if(strtotime($invite->terminaiton_date)>strtotime(date('Y-m-d H:i:s'))) <span class="green-text">Active</span> @else <span class="red-text">Expired</span> @endif --></td>
 					<td>
-					    <a href="{{route('Admin.deleteInvite', ['id' => $invite->id])}}"><button type="button" class="btn-flat"><i class="material-icons">delete</i></button></a>
+					    <a href="{{route('Admin.deleteInvite', ['id' => $invite->id])}}"><button type="button" class="btn-flat"><i class="material-icons red-text darken-1">delete_forever</i></button></a>
 					</td>
 				</tr>
 			    @endforeach

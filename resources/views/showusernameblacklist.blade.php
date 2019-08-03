@@ -31,7 +31,7 @@
 				<tr>
 					<td>{{ $forbidden_username->username }}</td>
 					<td>
-					    <a href="{{route('Admin.deleteForbiddenUsername', ['id' => $forbidden_username->id])}}"><button type="button" class="btn-flat"><i class="material-icons">delete</i></button></a>
+					    <a href="{{route('Admin.deleteForbiddenUsername', ['id' => $forbidden_username->id])}}"><button type="button" class="btn-flat"><i class="material-icons red-text darken-1">delete_forever</i></button></a>
 					</td>
 				</tr>
 			    @endforeach
