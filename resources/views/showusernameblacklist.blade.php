@@ -11,10 +11,10 @@
         <div class="container">
 	    <div class="row">
 		<div class="col m10">
-                    <h2>Username blacklist</h2>
+                    <h3><i class="material-icons">pan_tool</i> Username blacklist</h3>
 		</div>
 		<div class="col m2">
-			<a class="waves-effect waves-light modal-trigger add-button" href="#create-modal"><ion-icon size="large" name="add-circle"></ion-icon></a>
+		    <a class="btn-floating btn-large waves-effect waves-light modal-trigger blue darken-2 add-button" href="#create-modal"><i class="material-icons">add</i></a>
 		</div>
 	    </div>
             <div class="row">
@@ -22,8 +22,8 @@
                     <table class="striped">
 			<thead>
 			    	<tr>
-				    <th>Forbidden username</th>
-				    <th>Options</th>
+				    <th><i class="material-icons tiny">local_offer</i> Forbidden username</th>
+				    <th><i class="material-icons tiny">build</i> Options</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -31,7 +31,7 @@
 				<tr>
 					<td>{{ $forbidden_username->username }}</td>
 					<td>
-					    <a href="{{route('Admin.deleteForbiddenUsername', ['id' => $forbidden_username->id])}}"><button type="button" class="btn-flat">Delete</button></a>
+					    <a href="{{route('Admin.deleteForbiddenUsername', ['id' => $forbidden_username->id])}}"><button type="button" class="btn-flat"><i class="material-icons">delete</i></button></a>
 					</td>
 				</tr>
 			    @endforeach
@@ -51,6 +51,7 @@
 	  <div class="container">
 	    <div class="row">
 	      <div class="input-field col m12">
+		<i class="material-icons prefix">local_offer</i>
 		<input name="username_add" value="{{old('username_add')}}" data-length="50" id="u_id" type="text" class="validate input-text @error('username_add') invalid @enderror">
                 <label for="u_id">Username</label>
 	      </div>
@@ -58,7 +59,7 @@
 	  </div>
     </div>
     <div class="modal-footer" style="text-align:center;">
-      <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Add</button>
+      <button type="submit" href="#!" class="waves-effect waves-light btn blue darken-2">Add <i class="material-icons right">save</i></button>
     </div>
     </form>
   </div>
