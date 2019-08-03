@@ -34,7 +34,7 @@
 					<td>{{ $user->domain->name }}</td>
 					<td>
 					    <a class="waves-effect waves-light btn-flat modal-trigger" href="#edit-modal-{{ $user->id }}"><i class="material-icons">edit</i></a>
-					    <a href="{{route('Admin.deleteUser', ['id' => $user->id])}}"><button type="button" class="btn-flat"><i class="material-icons">delete</i></button></a>
+					    <a href="#delete-modal-{{$user->id}}" class="modal-trigger"><button type="button" class="btn-flat"><i class="material-icons">delete</i></button></a>
 					</td>
 				</tr>
 			    @endforeach
@@ -93,6 +93,17 @@
   </div>
 
 @foreach($users as $user)
+  <div id="delete-modal-{{$user->id}}" class="modal">
+    <div class="modal-content">
+      <h4>Delete user</h4>
+      <p>Are you really sure you want to delete <b>{{$user->username.'@'.$user->domain->name}}</b> forever?</p>
+    </div>
+    <div class="modal-footer" style="text-align:center;">
+      <a href="#!" class="modal-close waves-effect waves-green btn grey">Cancel</a>
+      <a href="{{route('Admin.deleteUser', ['id' => $user->id])}}" class="modal-close"><button type="button" class="btn red darken-1"><i class="material-icons right">delete_forever</i>Delete now!</button></a>
+    </div>
+  </div>
+
   <div id="edit-modal-{{ $user->id }}" class="modal">
     <form method="post" action="{{route('Admin.updateUser', ['id' => $user->id] )}}">
 	<input type="hidden" name="user_id" value="{{$user->id}}">

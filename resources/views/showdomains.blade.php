@@ -43,7 +43,7 @@
 					</td>
 					<td>
 					    <button type="submit" form="edit_form_{{ $domain->id }}" class="btn-flat"><i class="material-icons">save</i></button>
-					    <a href="{{route('Admin.deleteDomain', ['id' => $domain->id])}}"><button type="button" class="btn-flat"><i class="material-icons">delete</i></button></a>
+					    <a href="#delete-modal-{{$domain->id}}" class="modal-trigger"><button type="button" class="btn-flat"><i class="material-icons">delete</i></button></a>
 					</td>
 				</tr>
 			    @endforeach
@@ -84,6 +84,19 @@
     </div>
     </form>
   </div>
+
+@foreach($domains as $domain)
+  <div id="delete-modal-{{$domain->id}}" class="modal">
+    <div class="modal-content">
+      <h4>Delete domain</h4>
+      <p>Are you really sure you want to delete <b>{{$domain->name}} and all its mail users, aliases and invites</b> forever?</p>
+    </div>
+    <div class="modal-footer" style="text-align:center;">
+      <a href="#!" class="modal-close waves-effect waves-green btn grey">Cancel</a>
+      <a href="{{route('Admin.deleteDomain', ['id' => $domain->id])}}" class="modal-close"><button type="button" class="btn red darken-1"><i class="material-icons right">delete_forever</i>Delete now!</button></a>
+    </div>
+  </div>
+@endforeach
 
 <script>
 $(document).ready(function(){

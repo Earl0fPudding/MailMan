@@ -32,7 +32,7 @@
 					<td>{{ $admin->username }}</td>
 					<td>
 					    <a class="waves-effect waves-light btn-flat modal-trigger" href="#edit-modal-{{ $admin->id }}"><i class="material-icons">edit</i></a>
-					    <a href="{{route('Admin.deleteAdmin', ['id' => $admin->id])}}"><button type="button" class="btn-flat"><i class="material-icons">delete</i></button></a>
+					    <a href="#delete-modal-{{$admin->id}}" class="modal-trigger"><button type="button" class="btn-flat"><i class="material-icons">delete</i></button></a>
 					</td>
 				</tr>
 			    @endforeach
@@ -80,6 +80,17 @@
   </div>
 
 @foreach($admins as $admin)
+  <div id="delete-modal-{{$admin->id}}" class="modal">
+    <div class="modal-content">
+      <h4>Delete admin</h4>
+      <p>Are you really sure you want to delete <b>{{$admin->username}}</b> forever?</p>
+    </div>
+    <div class="modal-footer" style="text-align:center;">
+      <a href="#!" class="modal-close waves-effect waves-green btn grey">Cancel</a>
+      <a href="{{route('Admin.deleteAdmin', ['id' => $admin->id])}}" class="modal-close"><button type="button" class="btn red darken-1"><i class="material-icons right">delete_forever</i>Delete now!</button></a>
+    </div>
+  </div>
+
   <div id="edit-modal-{{ $admin->id }}" class="modal">
     <form method="post" action="{{route('Admin.updateAdmin', ['id' => $admin->id] )}}">
     <input type="hidden" name="admin_id" value="{{$admin->id}}">
