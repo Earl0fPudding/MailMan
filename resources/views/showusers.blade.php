@@ -12,6 +12,7 @@
 	    <div class="row">
 		<div class="col m10">
                     <h3><i class="material-icons">person</i> Mail users</h3>
+		    <p>Useres which have their own mailboxes and are able to log in to a mail client to send and receive mails.</p>
 		</div>
 		<div class="col m2">
 		    <a class="btn-floating btn-large waves-effect waves-light modal-trigger blue darken-2 add-button" href="#create-modal"><i class="material-icons">add</i></a>

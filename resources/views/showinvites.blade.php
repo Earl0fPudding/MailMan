@@ -12,6 +12,7 @@
 	    <div class="row">
 		<div class="col m10">
                     <h3><i class="material-icons">person_add</i> Invites</h3>
+		    <p>Create and share invitations with specific people so they can sign up to domains that are otherwise not registerable.</p>
 		</div>
 		<div class="col m2">
 		<a class="btn-floating btn-large waves-effect waves-light modal-trigger blue darken-2 add-button" href="#create-modal"><i class="material-icons">add</i></a>

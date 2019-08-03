@@ -12,6 +12,7 @@
 	    <div class="row">
 		<div class="col m10">
                     <h3><i class="material-icons">pan_tool</i> Username blacklist</h3>
+		    <p>Usernames which are not possible to sign up a new account with. Admins are allowed to create mail users with those names tho.</p>
 		</div>
 		<div class="col m2">
 		    <a class="btn-floating btn-large waves-effect waves-light modal-trigger blue darken-2 add-button" href="#create-modal"><i class="material-icons">add</i></a>
