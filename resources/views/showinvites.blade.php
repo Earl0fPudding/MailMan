@@ -33,7 +33,7 @@
 			<tbody>
 			    @foreach($invites as $invite)
 				<tr>
-					<td><a href="{{ route('Login.processInvite', [ 'token' => $invite->token ]) }}">Link</a></td>
+					<td><a href="{{ route('Login.processInvite', [ 'token' => $invite->token ]) }}" id="invite-{{$invite->id}}">Open</a><button type="button" class="btn-flat clipboard-trigger" data-clipboard-text="{{ route('Login.processInvite', [ 'token' => $invite->token ]) }}">Copy</button></td>
 					<td> @if($invite->name_preset === NULL) - @else {{ $invite->name_preset }} @endif </td>
 					<td>{{ $invite->domain->name }}</td>
 					<td>{{ $invite->termination_date }} <!-- @if(strtotime($invite->terminaiton_date)>strtotime(date('Y-m-d H:i:s'))) <span class="green-text">Active</span> @else <span class="red-text">Expired</span> @endif --></td>
@@ -120,7 +120,8 @@ $(document).ready(function(){
 		twelveHour: false
     });
     $('input.input-text').characterCounter();
-  });
+    new ClipboardJS('.clipboard-trigger');
+});
 
 </script>
 <script src="{{asset('js/mailman.js')}}"></script>
