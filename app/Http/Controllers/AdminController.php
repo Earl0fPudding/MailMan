@@ -70,7 +70,7 @@ class AdminController extends Controller
         }
 	$loggedin_user = Auth::guard('admin')->user();
 	if(Hash::check($request->old_password, $loggedin_user->password)){
-	    $loggedin_user->password = Hash::make($request->password);
+	    $loggedin_user->password = Hash::make($request->password_cp);
 	    $loggedin_user->save();
 	} else {
 	    return redirect()->back()->withErrors(get_message('err-pw-change-old'))->withInput();

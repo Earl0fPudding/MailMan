@@ -30,7 +30,7 @@ class UserController extends Controller
 
         $loggedin_user = Auth::guard('mail')->user();
         if(Hash::check($request->old_password, $loggedin_user->password)){
-            $loggedin_user->password = sha512_make($request->password);
+            $loggedin_user->password = sha512_make($request->password_cp);
             $loggedin_user->save();
         } else {
 	    return redirect()->back()->withErrors(get_message('err-pw-change-old'))->withInput();
